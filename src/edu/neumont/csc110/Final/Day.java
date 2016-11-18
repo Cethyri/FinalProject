@@ -3,7 +3,7 @@ package edu.neumont.csc110.Final;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Day{
+public class Day {
 	
 	public void DateAndTime(){
 		Date currentTime = new Date();

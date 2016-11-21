@@ -46,7 +46,7 @@ public class Calendar {
 	private String printMenu() {
 		String menu = "";
 		menu += "What would you like to do?\n\n";
-		menu += "Input - result\n";
+		menu += "\tInput - result\n\n";
 		menu += "\t" + LOAD + " " + NAME + " - load a calendar\n";
 		menu += "\t" + SAVE + " " + NAME + " - save your current calendar\n";
 		menu += "\t" + NEW + " " + NAME + " - save your current calendar to a new file\n";

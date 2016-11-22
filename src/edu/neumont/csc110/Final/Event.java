@@ -3,7 +3,7 @@ package edu.neumont.csc110.Final;
 import java.util.Scanner;
 
 public class Event {
-	private static final int MAX_MINUTES = 60, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0; 
+	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0; 
 	Scanner in = new Scanner(System.in);
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
@@ -16,12 +16,14 @@ public class Event {
 	}
 
 	public void SetStartTime() {
+		System.out.println("[Start Time]\n");
 		startAMPM = EditTimeConventions();
 		startHours = EditHours();
 		startMinutes = EditMinutes();
 	}
 
 	public void SetEndTime() {
+		System.out.println("[End Time]\n");
 		endAMPM = EditTimeConventions();
 		endHours = EditHours();
 		endMinutes = EditMinutes();
@@ -36,7 +38,7 @@ public class Event {
 			
 			amPM = Methods.getValidInput("What time convention do you want to use? Enter am or pm.");
 			amPM = amPM.toLowerCase();
-			if (amPM == "am" || amPM == "pm"){
+			if (amPM.equals("am") || amPM.equals("pm")){
 				valid = true;
 			}else {
 				System.out.println("Invalid input. Please try again.");
@@ -68,6 +70,7 @@ public class Event {
 		valid = false;
 		
 		do{
+			in.nextLine();
 			System.out.println("Please describe the event.");
 			description = in.nextLine();
 			
@@ -153,17 +156,17 @@ public class Event {
 	}
 	
 	public void DisplayTimes() {
-		System.out.println("Event Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
-		System.out.println("Event End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
+		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
+		System.out.println("\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
 	
 	public void DisplayDescription(){
-		System.out.println("Description:");
+		System.out.println("\nDescription:");
 		System.out.println(description);
 	}
 	
 	public void DisplayEventType(){
-		System.out.println("Event Occurrence: ");
+		System.out.println("\nEvent Occurrence: ");
 		switch (frequency) {
 		case 1:
 			System.out.println("Once");
@@ -184,16 +187,16 @@ public class Event {
 	}
 	
 	public void DisplayEventPriority(){
-		System.out.println("Event Priority: ");
+		System.out.println("\nEvent Priority: ");
 		switch (significance) {
 		case 1:
-			System.out.println("Low Priority");
+			System.out.println("Low");
 			break;
 		case 2:
-			System.out.println("Medium Priority");
+			System.out.println("Medium");
 			break;
 		case 3:
-			System.out.println("High Priority");
+			System.out.println("High");
 			break;
 		}
 	}

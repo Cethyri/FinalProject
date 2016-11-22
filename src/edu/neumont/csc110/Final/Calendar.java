@@ -156,7 +156,7 @@ public class Calendar {
 				}
 			} else {
 				Methods.pauseOn(FILE_PROB, false);
-				if (Methods.yesOrNo("Would you like to create a new file?")) {
+				if (Methods.getConfirmation("Would you like to create a new file?")) {
 					createNew(name);
 				}
 			}
@@ -173,7 +173,7 @@ public class Calendar {
 		if (f.exists()) {
 
 			System.out.println("This file already exists.");
-			if (Methods.yesOrNo("would you like to save over it?")) {
+			if (Methods.getConfirmation("would you like to save over it?")) {
 				save(name);
 			}
 
@@ -243,7 +243,7 @@ public class Calendar {
 
 		if (toDelete.exists()) {
 
-			if (Methods.yesOrNo("Are you sure you want to delete " + name + "?")) {
+			if (Methods.getConfirmation("Are you sure you want to delete " + name + "?")) {
 
 				toDelete.delete();
 				if (name.equalsIgnoreCase(currentName)) {
@@ -281,7 +281,7 @@ public class Calendar {
 	}
 
 	private void quit() {
-		if (Methods.yesOrNo("Are you sure you would like to quit?")) {
+		if (Methods.getConfirmation("Are you sure you would like to quit?")) {
 			saveBefore("quiting");
 			quit = true;
 		}
@@ -297,7 +297,7 @@ public class Calendar {
 			} else {
 				System.out.println(".");
 			}
-			if (Methods.yesOrNo("Would you like to save before " + action + "?")) {
+			if (Methods.getConfirmation("Would you like to save before " + action + "?")) {
 				save(currentName);
 			}
 		}

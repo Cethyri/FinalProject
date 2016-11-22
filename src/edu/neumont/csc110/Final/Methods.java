@@ -35,36 +35,6 @@ public class Methods {
 		return input;
 	}
 	
-	public static boolean yesOrNo(String question) {
-		question += " (yes or no)";
-		System.out.println(question);
-		boolean valid = false, answer = false;
-
-		do {
-			input = in.nextLine();
-
-			if (!input.isEmpty()) {
-				switch(input.toLowerCase()) {
-				case "yes" :
-				case "y" :
-					answer = true;
-					valid = true;	
-					break;
-				case "no" :
-				case "n" :
-					valid = true;
-					break;
-				default :
-					System.out.println("\nUnrecognizable input. " + question);
-				}
-			} else {
-				System.out.println("\nNo valid input. " + question);
-			}
-		} while (!valid);
-
-		return answer;
-	}
-	
 	public static Date getValidDateInput(String question){
 		System.out.print(question);
 
@@ -88,16 +58,34 @@ public class Methods {
 		return dateFormat;
 	}
 	
-	public static String getConfirmation(String question){
+	public static boolean getConfirmation(String question) {
+		question += " (yes or no)";
 		System.out.println(question);
-		regex = "y|n|Y|N";
+		boolean valid = false, answer = false;
 		
 		do {
 			input = in.nextLine();
 			
-		} while (!input.matches(regex));
+			if (!input.isEmpty()) {
+				switch(input.toLowerCase()) {
+				case "yes" :
+				case "y" :
+					answer = true;
+					valid = true;	
+					break;
+				case "no" :
+				case "n" :
+					valid = true;
+					break;
+				default :
+					System.out.println("\nUnrecognizable input. " + question);
+				}
+			} else {
+				System.out.println("\nNo valid input. " + question);
+			}
+		} while (!valid);
 		
-		return input;
+		return answer;
 	}
 	
 	public static void pauseOn(String line, boolean clearScreen) {

@@ -1,10 +1,7 @@
 package edu.neumont.csc110.Final;
 
-import java.util.Scanner;
-
 public class Event {
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
-	Scanner in = new Scanner(System.in);
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
 	private PriorityType importance;

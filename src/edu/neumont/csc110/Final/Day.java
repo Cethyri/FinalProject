@@ -22,8 +22,7 @@ public class Day {
 	public void AddEvent() {
 		Methods.getValidInput("What would you like to add?\n");
 		
-		System.out.println("Is this correct:\n" + Methods.getLastInput());
-		Methods.getConfirmation("\n\tY/N");
+		Methods.getConfirmation("Is this correct:\n" + Methods.getLastInput());
 		
 		////////////return getInput into array list
 	}

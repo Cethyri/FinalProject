@@ -8,6 +8,17 @@ public class Driver {
 //		Day D = new Day();
 //		
 //		D.AddEvent();
+		Event e = new Event();
+		
+		e.SetStartTime();
+		e.SetEndTime();
+		e.SetEventOccurence();
+		e.SetPriorityLevel();
+		e.SetDescription();
+		e.DisplayTimes();
+		e.DisplayEventType();
+		e.DisplayEventPriority();
+		e.SetDescription();
 		
 		Calendar C = new Calendar();
 		

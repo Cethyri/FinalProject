@@ -24,7 +24,7 @@ public class Day {
 		
 		Methods.getConfirmation("Is this correct:\n" + Methods.getLastInput());
 		
-		////////////return getInput into array list
+		//return getInput into array list
 	}
 
 	public void RemoveEvent() {

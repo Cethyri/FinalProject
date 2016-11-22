@@ -94,6 +94,8 @@ public class Event {
 		case 5:
 			occurence = EventType.Yearly;
 			break;
+		default:
+			Methods.pauseOn("Something went wrong - SetEventOccurence()", true);
 		}
 		return frequency;
 	}
@@ -116,6 +118,8 @@ public class Event {
 		case 3:
 			importance = PriorityType.HighImportance;
 			break;
+		default:
+			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
 
 		return significance;
@@ -149,6 +153,8 @@ public class Event {
 		case 5:
 			System.out.println("Yearly");
 			break;
+		default:
+			Methods.pauseOn("Something went wrong - DisplayEventType()", true);
 		}
 	}
 
@@ -164,6 +170,8 @@ public class Event {
 		case 3:
 			System.out.println("High");
 			break;
+		default:
+			Methods.pauseOn("Something went wrong - DisplayEventPriority()", true);
 		}
 	}
 }

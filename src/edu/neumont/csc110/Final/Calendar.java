@@ -23,7 +23,7 @@ public class Calendar {
 		currentName = null;
 		quit = false;
 		saved = true;
-
+		
 	}
 
 	public void interact() {

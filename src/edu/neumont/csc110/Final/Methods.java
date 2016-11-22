@@ -41,16 +41,16 @@ public class Methods {
 		question= in.nextLine();
 		
 		regex = "(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])/([0-9]{4}$)"; 
-
+		/*limits input  months 1 - 12, limits days 1-31, limits year to 4 digits*/
 
 		while (!question.matches(regex)) {
 
 			System.out.println("Please enter a date. \nEx. MM/DD/YYYY; 1/1/1111; 01/01/1111");
-			question = in.nextLine();
+			input = in.nextLine();
 		}
 		
 		try {
-			dateFormat = formatter.parse(question);
+			dateFormat = formatter.parse(input);
 			String newDateString = formatter.format(dateFormat);
 			System.out.println(newDateString);
 		} catch (ParseException e) { }
@@ -58,8 +58,8 @@ public class Methods {
 		return dateFormat;
 	}
 	
-	public static String getConfirmation(String question){
-		System.out.println(question);
+	public static String getConfirmation(){
+		System.out.println("Y/N");
 		regex = "y|n|Y|N";
 		
 		do {
@@ -88,7 +88,7 @@ public class Methods {
 		}
 	}
 
-	public static String getInput() {
+	public static String getLastInput() {
 		return input;
 	}
 

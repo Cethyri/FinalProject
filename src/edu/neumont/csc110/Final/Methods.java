@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Methods {
 
+	private static final int CHAR_VAL_NUM_MIN = 48, CHAR_VAL_NUM_MAX = 57;
+	
 	private static Scanner in = new Scanner(System.in);
 	private static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	
@@ -33,6 +35,42 @@ public class Methods {
 		} while (!valid);
 
 		return input;
+	}
+	
+	public static int getValidNumInput(String question, int min, int max) {
+		System.out.println(question);
+		boolean valid = false;
+		int num = 0;
+		do {
+			input = in.nextLine();
+
+			input = onlyNum(input);
+
+			if (!input.isEmpty()) {
+				num = Integer.parseInt(input);
+
+				if (num >= min && num <= max) {
+					valid = true;
+				} else {
+					System.out.println("Out of range. " + question);
+				}
+			} else {
+				System.out.println("No valid input. " + question);
+			}
+		} while (!valid);
+
+		return num;
+	}
+	
+	private static String onlyNum(String input) {
+		String temp = "";
+		for (int x = 0; x < input.length(); x++) {
+			if (input.charAt(x) >= CHAR_VAL_NUM_MIN && input.charAt(x) <= CHAR_VAL_NUM_MAX) {
+				temp += input.charAt(x);
+			}
+		}
+
+		return temp;
 	}
 	
 	public static Date getValidDateInput(String question){

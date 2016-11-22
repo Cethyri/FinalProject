@@ -92,6 +92,27 @@ public class Event {
 		}
 		return frequency;
 	}
+	
+	public void DisplayEventType(){
+		System.out.println("Event Occurrence: ");
+		switch (frequency) {
+		case 1:
+			System.out.println("Once");
+			break;
+		case 2:
+			System.out.println("Daily");
+			break;
+		case 3:
+			System.out.println("Weekly");
+			break;
+		case 4:
+			System.out.println("Monthly");
+			break;
+		case 5:
+			System.out.println("Yearly");
+			break;
+		}
+	}
 
 	public void SetPriorityLevel() {
 		valid = false;
@@ -126,5 +147,19 @@ public class Event {
 			break;
 		}
 	}
-
+	
+	public void DisplayEventPriority(){
+		System.out.println("Event Priority: ");
+		switch (significance) {
+		case 1:
+			System.out.println("Low Priority");
+			break;
+		case 2:
+			System.out.println("Medium Priority");
+			break;
+		case 3:
+			System.out.println("High Priority");
+			break;
+		}
+	}
 }

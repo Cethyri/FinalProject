@@ -4,36 +4,37 @@ import java.util.Scanner;
 
 public class Event {
 	Scanner in = new Scanner(System.in);
-	Methods m = new Methods();
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
 	private PriorityType importance;
-	private String description, yesNo;
-	private boolean valid;
+	private String description;
+	private boolean valid, yesNo;
 
 	public Event() {
 
 	}
 
 	public void SetStartTime() {
-		startHours = EditTime();
-		startMinutes = EditTime();
+		startHours = EditHours();
+		startMinutes = EditMinutes();
 	}
 
 	public void SetEndTime() {
-		endHours = EditTime();
-		endMinutes = EditTime();
+		endHours = EditHours();
+		endMinutes = EditMinutes();
 	}
 
-	private int EditTime() {
-		int Time = 0;
-
-		return Time;
+	private int EditHours() {
+		int hours;
+		
+		
+		return hours;
 	}
-
-	public void DisplayTimes() {
-		System.out.println("Event Start Time - [" + startHours + ":" + startMinutes + "]");
-		System.out.println("Event End Time - [" + endHours + ":" + endMinutes + "]");
+	
+	private int EditMinutes(){
+		int minutes;
+		
+		return minutes;
 	}
 
 	public void SetDescription() {
@@ -43,13 +44,8 @@ public class Event {
 			System.out.println("Please describe the event.");
 			description = in.nextLine();
 			
-			yesNo = m.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
-		}while (yesNo == "n" || yesNo == "N");
-	}
-	
-	public void DisplayDescription(){
-		System.out.println("Description:");
-		System.out.println(description);
+			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
+		}while (!yesNo);
 	}
 
 	public int SetEventOccurence() {
@@ -92,29 +88,8 @@ public class Event {
 		}
 		return frequency;
 	}
-	
-	public void DisplayEventType(){
-		System.out.println("Event Occurrence: ");
-		switch (frequency) {
-		case 1:
-			System.out.println("Once");
-			break;
-		case 2:
-			System.out.println("Daily");
-			break;
-		case 3:
-			System.out.println("Weekly");
-			break;
-		case 4:
-			System.out.println("Monthly");
-			break;
-		case 5:
-			System.out.println("Yearly");
-			break;
-		}
-	}
 
-	public void SetPriorityLevel() {
+	public int SetPriorityLevel() {
 		valid = false;
 
 		do {
@@ -144,6 +119,39 @@ public class Event {
 			break;
 		case 3:
 			importance = PriorityType.HighImportance;
+			break;
+		}
+		
+		return significance;
+	}
+	
+	public void DisplayTimes() {
+		System.out.println("Event Start Time - [" + startHours + ":" + startMinutes + "]");
+		System.out.println("Event End Time - [" + endHours + ":" + endMinutes + "]");
+	}
+	
+	public void DisplayDescription(){
+		System.out.println("Description:");
+		System.out.println(description);
+	}
+	
+	public void DisplayEventType(){
+		System.out.println("Event Occurrence: ");
+		switch (frequency) {
+		case 1:
+			System.out.println("Once");
+			break;
+		case 2:
+			System.out.println("Daily");
+			break;
+		case 3:
+			System.out.println("Weekly");
+			break;
+		case 4:
+			System.out.println("Monthly");
+			break;
+		case 5:
+			System.out.println("Yearly");
 			break;
 		}
 	}

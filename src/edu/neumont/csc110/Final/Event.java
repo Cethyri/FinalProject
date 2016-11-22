@@ -8,7 +8,7 @@ public class Event {
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
 	private PriorityType importance;
-	private String description;
+	private String description, startAMPM, endAMPM;
 	private boolean valid, yesNo;
 
 	public Event() {
@@ -16,17 +16,41 @@ public class Event {
 	}
 
 	public void SetStartTime() {
+		startAMPM = EditTimeConventions();
 		startHours = EditHours();
 		startMinutes = EditMinutes();
 	}
 
 	public void SetEndTime() {
+		endAMPM = EditTimeConventions();
 		endHours = EditHours();
 		endMinutes = EditMinutes();
+	}
+	
+	private String EditTimeConventions(){
+		String amPM;
+		valid = false;
+		
+		do
+		{
+			
+			amPM = Methods.getValidInput("What time convention do you want to use? Enter am or pm.");
+			amPM = amPM.toLowerCase();
+			if (amPM == "am" || amPM == "pm"){
+				valid = true;
+			}else {
+				System.out.println("Invalid input. Please try again.");
+				in.nextLine();
+			}
+		}while (!valid);
+		
+		return amPM;
 	}
 
 	private int EditHours() {
 		int hours;
+		
+		hours = Methods.getValidInteger("What is the hours portion of the time?", MIN_HOURS, MAX_HOURS);
 		
 		
 		return hours;
@@ -129,8 +153,8 @@ public class Event {
 	}
 	
 	public void DisplayTimes() {
-		System.out.println("Event Start Time - [" + startHours + ":" + startMinutes + "]");
-		System.out.println("Event End Time - [" + endHours + ":" + endMinutes + "]");
+		System.out.println("Event Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
+		System.out.println("Event End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
 	
 	public void DisplayDescription(){

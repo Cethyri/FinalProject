@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Event {
 	Scanner in = new Scanner(System.in);
 	Methods m = new Methods();
-	private int startHours, startMinutes, endHours, endMinutes, frequency, significance, yesNo;
+	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
 	private PriorityType importance;
-	private String description;
+	private String description, yesNo;
 	private boolean valid;
 
 	public Event() {
@@ -43,29 +43,13 @@ public class Event {
 			System.out.println("Please describe the event.");
 			description = in.nextLine();
 			
-			do {
-				System.out.println("You entered : \n" + description);
-				System.out.println("Is this correct? [1 - Yes] [2 - No]");
-				
-				if (in.hasNextInt()) {
-					yesNo = in.nextInt();
-					
-					if (yesNo == 1) {
-						valid = true;
-					} else if (yesNo == 2){
-						valid = true;
-					}else {
-						System.out.println("Input out of range. Please try again.");
-					}
-				} else {
-					System.out.println("Invalid input. Please try again.");
-					in.nextLine();
-				}
-			} while (!valid);	
-			if (yesNo == 2){
-				valid = false;
-			}
-		}while (!valid);
+			yesNo = m.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
+		}while (yesNo == "n" || yesNo == "N");
+	}
+	
+	public void DisplayDescription(){
+		System.out.println("Description:");
+		System.out.println(description);
 	}
 
 	public int SetEventOccurence() {

@@ -2,6 +2,7 @@ package edu.neumont.csc110.Final;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -10,8 +11,10 @@ public class Day {
 	private Date eventDate;
 	private String dateString;
 
-	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-	Scanner in = new Scanner(System.in);
+	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	private Scanner in = new Scanner(System.in);
+	
+	private ArrayList<Event> events;
 
 	public void DateAndTime() {
 
@@ -48,5 +51,9 @@ public class Day {
 
 	public void interact() {
 
+	}
+	
+	public ArrayList<Event> getEvents() {
+		return events;
 	}
 }

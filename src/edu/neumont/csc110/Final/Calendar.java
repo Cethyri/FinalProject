@@ -11,18 +11,22 @@ public class Calendar {
 
 	private static final String LOAD = "load", SAVE = "save", NEW = "new", ADD = "add", DELETE = "delete",
 			LIST = "list", QUIT = "quit", NAME = "(calendar name)", FILE_PATH = "saveFiles/";
+	private static final String FILE_PROB = "That file doesn't exist. Try checking the files with \"list\".";
 
-	boolean quit;
-	
+	private boolean quit, saved;
+
+	private String currentName;
+
 	private ArrayList<Day> dates;
 
 	public Calendar() {
-		// something normal
+		currentName = null;
+		quit = false;
+		saved = true;
 
 	}
 
 	public void interact() {
-		quit = false;
 		String input, action, name;
 		String[] parts;
 
@@ -33,7 +37,7 @@ public class Calendar {
 			parts = input.split(" ");
 
 			action = parts[0];
-			
+
 			if (parts.length > 1) {
 				name = parts[1];
 				doAction(action, name);
@@ -45,10 +49,17 @@ public class Calendar {
 
 	private String printMenu() {
 		String menu = "";
-		menu += "What would you like to do?\n\n";
+		menu += "What would you like to do?";
+		menu += "\t\t";
+		if (currentName != null) {
+			menu += "Current calendar: " + currentName;
+		} else {
+			menu += " No calendar selected";
+		}
+		menu += "\n\n";
 		menu += "\tInput - result\n\n";
 		menu += "\t" + LOAD + " " + NAME + " - load a calendar\n";
-		menu += "\t" + SAVE + " " + NAME + " - save your current calendar\n";
+		menu += "\t" + SAVE + " - save your current calendar\n";
 		menu += "\t" + NEW + " " + NAME + " - save your current calendar to a new file\n";
 		menu += "\t" + ADD + " " + NAME + " - load a calendar and add it to yours\n";
 		menu += "\t" + DELETE + " " + NAME + " - load a calendar and add it to yours\n";
@@ -62,9 +73,6 @@ public class Calendar {
 		switch (action) {
 		case LOAD:
 			load(name);
-			break;
-		case SAVE:
-			save(name);
 			break;
 		case NEW:
 			createNew(name);
@@ -82,6 +90,9 @@ public class Calendar {
 
 	private void doAction(String action) {
 		switch (action) {
+		case SAVE:
+			save(currentName);
+			break;
 		case LIST:
 			list();
 			break;
@@ -94,97 +105,215 @@ public class Calendar {
 	}
 
 	private void load(String name) {
-		try {
-			// Open file to read from, named SavedObj.sav.
-			FileInputStream saveFile = new FileInputStream(FILE_PATH + name + ".sav");
 
-			// Create an ObjectInputStream to get objects from save file.
-			ObjectInputStream save = new ObjectInputStream(saveFile);
+		File f = new File(FILE_PATH + name + ".sav");
 
-			// Now we do the restore.
-			// readObject() returns a generic Object, we cast those back
-			// into their original class type.
-			// For primitive types, use the corresponding reference class.
-			dates = (ArrayList<Day>) save.readObject();
+		if (f.exists()) {
+			try {
 
-			// Close the file.
-			save.close(); // This also closes saveFile.
-		} catch (Exception exc) {
-			// exc.printStackTrace(); // If there was an error, print the info.
-			Methods.pauseOn("That file name doesn't exist", true);
+				FileInputStream loadFile = new FileInputStream(f.getPath());
+
+				ObjectInputStream load = new ObjectInputStream(loadFile);
+
+				saveBefore("loading");
+
+				dates = (ArrayList<Day>) load.readObject();
+				currentName = name;
+				
+				Methods.pauseOn("Calendar " + name + " loaded", true);
+
+				load.close();
+
+			} catch (Exception exc) {
+				error(exc);
+			}
+		} else {
+			Methods.pauseOn(FILE_PROB, true);
 		}
 	}
 
 	private void save(String name) {
-		try { // Catch errors in I/O if necessary.
-				// Open a file to write to, named SavedObj.sav.
-			FileOutputStream saveFile = new FileOutputStream(FILE_PATH + name + ".sav");
+		if (currentName != null) {
 
-			// Create an ObjectOutputStream to put objects into save file.
-			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			File f = new File(FILE_PATH + name + ".sav");
 
-			// Now we do the save.
-			save.writeObject(dates);
-			// Close the file.
-			save.close(); // This also closes saveFile.
-		} catch (Exception exc) {
-			exc.printStackTrace(); // If there was an error, print the info.
+			if (f.exists()) {
+				try {
+
+					FileOutputStream saveFile = new FileOutputStream(f.getPath());
+
+					ObjectOutputStream save = new ObjectOutputStream(saveFile);
+
+					save.writeObject(dates);
+					currentName = name;
+					
+					Methods.pauseOn("Calendar " + name + " saved", true);
+
+					save.close();
+
+				} catch (Exception exc) {
+					error(exc);
+				}
+			} else {
+				Methods.pauseOn(FILE_PROB, false);
+				if (Methods.yesOrNo("Would you like to create a new file?")) {
+					createNew(name);
+				}
+			}
+		} else {
+			Methods.pauseOn("You haven't loaded or created a file yet", true);
 		}
 
 	}
 
 	private void createNew(String name) {
-		unimplemented();
+
+		File f = new File(FILE_PATH + name + ".sav");
+
+		if (f.exists()) {
+
+			System.out.println("This file already exists.");
+			if (Methods.yesOrNo("would you like to save over it?")) {
+				save(name);
+			}
+
+		} else {
+			try {
+				
+				FileOutputStream saveFile = new FileOutputStream(f.getPath());
+
+				ObjectOutputStream save = new ObjectOutputStream(saveFile);
+				
+				save.writeObject(dates);
+				currentName = name;
+
+				Methods.pauseOn("New Calendar \"" + name + "\" created", false);
+				
+				save.close();
+
+			} catch (Exception e) {
+				error(e);
+			}
+		}
 	}
 
 	private void add(String name) {
-		unimplemented();
+
+		if (currentName != name) {
+			
+			File f = new File(FILE_PATH + name + ".sav");
+			
+			if (f.exists()) {
+				try {
+					
+					FileInputStream saveFile = new FileInputStream(f.getPath());
+					
+					ObjectInputStream save = new ObjectInputStream(saveFile);
+					
+					ArrayList<Day> tDates = (ArrayList<Day>) save.readObject();
+					
+					save.close();
+					
+					if (tDates != null) {					
+						for (Day d : tDates) {
+							for (Event e : d.getEvents()) {
+								addEvent(e);
+							}
+						}
+						Methods.pauseOn("Calendar " + name + " added to " + currentName + ".", true);
+					} else {
+						Methods.pauseOn("Calander " + name + " has no contents,", true);
+					}
+					
+				} catch (Exception exc) {
+					error(exc);
+				}
+			} else {
+				Methods.pauseOn(FILE_PROB, true);
+			}
+		} else {
+			Methods.pauseOn("You can't add a Calendar to itself.", true);
+		}
+
 	}
 
 	private void delete(String name) {
-		File toDelete;
-		try {
-			toDelete = new File(FILE_PATH + name + ".sav");
-			toDelete.delete();
 
-		} catch (Exception e) {
-			// File permission problems are caught here.
-			System.err.println(e);
+		File toDelete = new File(FILE_PATH + name + ".sav");
+
+		if (toDelete.exists()) {
+
+			if (Methods.yesOrNo("Are you sure you want to delete " + name + "?")) {
+
+				toDelete.delete();
+				if (name.equalsIgnoreCase(currentName)) {
+					currentName = null;
+				}
+
+				Methods.pauseOn("Calendar \"" + name + "\" deleted", false);
+			}
+
+		} else {
+			Methods.pauseOn(FILE_PROB, false);
 		}
+		System.out.print("Remaining ");
 		list();
 	}
 
 	private void list() {
-		File f;
-		File[] files;
+		File f = new File(FILE_PATH);
+		File[] files = f.listFiles();
 
-		try {
-			// create new file
-			f = new File(FILE_PATH);
-
-			// returns pathnames for files and directory
-			files = f.listFiles();
+		if (f.isDirectory()) {
 
 			System.out.println("\nFiles:\n");
-			// for each pathname in pathname array
+
 			for (File file : files) {
-				// prints file and directory paths
-				System.out.println(file.getName());
+
+				if (file.getName().endsWith(".sav")) {
+
+					System.out.println(file.getName().substring(0, file.getName().length() - ".sav".length()));
+				}
 			}
-			System.out.println();
-			Methods.pauseOn("", true);
-		} catch (Exception e) {
-			// if any error occurs
-			e.printStackTrace();
+			Methods.pauseOn("\n", true);
+
 		}
 	}
 
 	private void quit() {
-		unimplemented();
+		if (Methods.yesOrNo("Are you sure you would like to quit?")) {
+			saveBefore("quiting");
+			quit = true;
+		}
+		Methods.pauseOn("", true);
 	}
-	
+
+	private void saveBefore(String action) {
+		if (!saved) {
+
+			System.out.print("You haven't saved");
+			if (currentName != null) {
+				System.out.println(" " + currentName + " yet?");
+			} else {
+				System.out.println(".");
+			}
+			if (Methods.yesOrNo("Would you like to save before " + action + "?")) {
+				save(currentName);
+			}
+		}
+	}
+
+	private void addEvent(Event e) {
+		unimplemented();
+
+	}
+
 	private void unimplemented() {
 		Methods.pauseOn("UNINPLEMENTED", true);
-		
+	}
+
+	private void error(Exception exc) {
+		exc.printStackTrace();
+		Methods.pauseOn("An error occured", true);
 	}
 }

@@ -12,7 +12,7 @@ public class Methods {
 	}
 
 	public static String getValidInput(String question) {
-		System.out.print(question);
+		System.out.println(question);
 		boolean valid = false;
 
 		do {
@@ -21,11 +21,41 @@ public class Methods {
 			if (!input.isEmpty()) {
 				valid = true;
 			} else {
-				System.out.println("No valid input. " + question);
+				System.out.println("\nNo valid input. " + question);
 			}
 		} while (!valid);
 
 		return input;
+	}
+	
+	public static boolean yesOrNo(String question) {
+		question += " (yes or no)";
+		System.out.println(question);
+		boolean valid = false, answer = false;
+
+		do {
+			input = in.nextLine();
+
+			if (!input.isEmpty()) {
+				switch(input.toLowerCase()) {
+				case "yes" :
+				case "y" :
+					answer = true;
+					valid = true;	
+					break;
+				case "no" :
+				case "n" :
+					valid = true;
+					break;
+				default :
+					System.out.println("\nUnrecognizable input. " + question);
+				}
+			} else {
+				System.out.println("\nNo valid input. " + question);
+			}
+		} while (!valid);
+
+		return answer;
 	}
 	
 	public static void pauseOn(String line, boolean clearScreen) {

@@ -18,7 +18,7 @@ public class Calendar {
 
 	public Calendar() {
 		// something normal
-
+		
 	}
 
 	public void interact() {

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Day {
-	private ArrayList<Event> events;
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private Scanner in = new Scanner(System.in);

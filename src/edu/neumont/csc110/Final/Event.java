@@ -3,13 +3,14 @@ package edu.neumont.csc110.Final;
 import java.util.Scanner;
 
 public class Event {
+	
 	Scanner in = new Scanner(System.in);
-	Methods m = new Methods();
+	
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
 	private PriorityType importance;
-	private String description, yesNo;
-	private boolean valid;
+	private String description;
+	private boolean valid, yesNo;
 
 	public Event() {
 
@@ -43,8 +44,8 @@ public class Event {
 			System.out.println("Please describe the event.");
 			description = in.nextLine();
 			
-			yesNo = m.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
-		}while (yesNo == "n" || yesNo == "N");
+			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
+		}while (!yesNo);
 	}
 	
 	public void DisplayDescription(){

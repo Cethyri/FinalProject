@@ -11,7 +11,7 @@ public class Event {
 	private String description;
 	private boolean valid;
 
-	Event() {
+	public Event() {
 
 	}
 

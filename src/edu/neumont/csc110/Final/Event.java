@@ -3,7 +3,7 @@ package edu.neumont.csc110.Final;
 import java.util.Scanner;
 
 public class Event {
-	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0; 
+	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
 	Scanner in = new Scanner(System.in);
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurence;
@@ -28,76 +28,58 @@ public class Event {
 		endHours = EditHours();
 		endMinutes = EditMinutes();
 	}
-	
-	private String EditTimeConventions(){
+
+	private String EditTimeConventions() {
 		String amPM;
 		valid = false;
-		
-		do
-		{
-			
+
+		do {
+
 			amPM = Methods.getValidInput("What time convention do you want to use? Enter am or pm.");
 			amPM = amPM.toLowerCase();
-			if (amPM.equals("am") || amPM.equals("pm")){
+			if (amPM.equals("am") || amPM.equals("pm")) {
 				valid = true;
-			}else {
+			} else {
 				System.out.println("Invalid input. Please try again.");
-				in.nextLine();
 			}
-		}while (!valid);
-		
+		} while (!valid);
+
 		return amPM;
 	}
 
 	private int EditHours() {
 		int hours;
-		
+
 		hours = Methods.getValidInteger("What is the hours portion of the time?", MIN_HOURS, MAX_HOURS);
-		
-		
+
 		return hours;
 	}
-	
-	private int EditMinutes(){
+
+	private int EditMinutes() {
 		int minutes;
-		
-		minutes = Methods.getValidInteger("What is the minutes portion of the time?", MIN_MINUTES , MAX_MINUTES);
-		
+
+		minutes = Methods.getValidInteger("What is the minutes portion of the time?", MIN_MINUTES, MAX_MINUTES);
+
 		return minutes;
 	}
 
 	public void SetDescription() {
 		valid = false;
-		
-		do{
-			in.nextLine();
-			System.out.println("Please describe the event.");
-			description = in.nextLine();
-			
-			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
-		}while (!yesNo);
+
+		do {
+			description = Methods.getValidInput("Please describe the event.");
+
+			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");
+		} while (!yesNo);
 	}
 
 	public int SetEventOccurence() {
 		valid = false;
 
-		do {
-			System.out.println(
-					"How often will this event happen? Enter the number corrosponding to how often the event occurs.");
-			System.out.println("[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]");
-
-			if (in.hasNextInt()) {
-				frequency = in.nextInt();
-				if (frequency >= 1 && frequency <= 5) {
-					valid = true;
-				} else {
-					System.out.println("Input out of range. Please try again.");
-				}
-			} else {
-				System.out.println("Invalid input. Please try again.");
-				in.nextLine();
-			}
-		} while (!valid);
+		frequency = Methods.getValidInteger(
+				"How often will this event happen? Enter the number corrosponding to how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]",
+				1,
+				5);
 
 		switch (frequency) {
 		case 1:
@@ -122,23 +104,10 @@ public class Event {
 	public int SetPriorityLevel() {
 		valid = false;
 
-		do {
-			System.out.println(
-					"How important is this event happen? Enter the number corrosponding to the level of importance.");
-			System.out.println("[1 - Low] [2 - Medium] [3 - High]");
-
-			if (in.hasNextInt()) {
-				significance = in.nextInt();
-				if (significance >= 1 && significance <= 5) {
-					valid = true;
-				} else {
-					System.out.println("Input out of range. Please try again.");
-				}
-			} else {
-				System.out.println("Invalid input. Please try again.");
-				in.nextLine();
-			}
-		} while (!valid);
+		significance = Methods.getValidInteger(
+				"How important is this event happen? Enter the number corrosponding to the level of importance.\n[1 - Low] [2 - Medium] [3 - High]",
+				1,
+				3);
 
 		switch (significance) {
 		case 1:
@@ -151,21 +120,21 @@ public class Event {
 			importance = PriorityType.HighImportance;
 			break;
 		}
-		
+
 		return significance;
 	}
-	
+
 	public void DisplayTimes() {
 		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
 		System.out.println("\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
-	
-	public void DisplayDescription(){
+
+	public void DisplayDescription() {
 		System.out.println("\nDescription:");
 		System.out.println(description);
 	}
-	
-	public void DisplayEventType(){
+
+	public void DisplayEventType() {
 		System.out.println("\nEvent Occurrence: ");
 		switch (frequency) {
 		case 1:
@@ -185,8 +154,8 @@ public class Event {
 			break;
 		}
 	}
-	
-	public void DisplayEventPriority(){
+
+	public void DisplayEventPriority() {
 		System.out.println("\nEvent Priority: ");
 		switch (significance) {
 		case 1:

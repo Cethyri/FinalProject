@@ -34,6 +34,7 @@ public class Event {
 	private int EditMinutes(){
 		int minutes;
 		
+		
 		return minutes;
 	}
 

@@ -37,7 +37,7 @@ public class Methods {
 		return input;
 	}
 	
-	public static int getValidNumInput(String question, int min, int max) {
+	public static int getValidInteger(String question, int min, int max) {
 		System.out.println(question);
 		boolean valid = false;
 		int num = 0;

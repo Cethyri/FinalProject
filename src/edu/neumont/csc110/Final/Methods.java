@@ -106,7 +106,7 @@ public class Methods {
 		}
 	}
 
-	public static String getInput() {
+	public static String getLastInput() {
 		return input;
 	}
 

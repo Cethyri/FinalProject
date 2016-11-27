@@ -6,12 +6,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Day {
-	private ArrayList<Event> events;
+	
+	private ArrayList<Day> events;
+	private int i;
 
 	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	Scanner in = new Scanner(System.in);
 
-	public void DateAndTime() {
+	public void currentDateAndTime() {
 
 		Date currentTime = new Date();
 		System.out.println(formatter.format(currentTime));
@@ -19,18 +21,18 @@ public class Day {
 
 
 	public void AddEvent() {
-		Methods.getValidInput("What would you like to add?\n");
+		Event E = new Event();
 		
-		System.out.println("Is this correct:\n" + Methods.getInput());
-		Methods.getConfirmation();
+		E.setEventOccurence();
+		E.setPriorityLevel();
+		E.setStartTime();
+		E.setEndTime();
+		E.setDescription();
 		
-		////////////return getInput into array list
+		//events.add(i, E.displayTimesAndDescripiton());
 	}
 
 	public void RemoveEvent() {
-	}
-
-	public void interactWithEvents() {
-
+		
 	}
 }

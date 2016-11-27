@@ -1,5 +1,199 @@
 package edu.neumont.csc110.Final;
 
-public class Event {
+import java.util.Scanner;
 
+public class Event {
+	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0; 
+	Scanner in = new Scanner(System.in);
+	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
+	private EventType occurence;
+	private PriorityType importance;
+	private String description, startAMPM, endAMPM;
+	private boolean valid, yesNo;
+
+	public Event() {
+
+	}
+
+	public void setStartTime() {
+		System.out.println("[Start Time]\n");
+		startAMPM = editTimeConventions();
+		startHours = editHours();
+		startMinutes = editMinutes();
+	}
+
+	public void setEndTime() {
+		System.out.println("[End Time]\n");
+		endAMPM = editTimeConventions();
+		endHours = editHours();
+		endMinutes = editMinutes();
+	}
+	
+	private String editTimeConventions(){
+		String amPM;
+		valid = false;
+		
+		do
+		{
+			
+			amPM = Methods.getValidInput("What time convention do you want to use? Enter am or pm.");
+			amPM = amPM.toLowerCase();
+			if (amPM.equals("am") || amPM.equals("pm")){
+				valid = true;
+			}else {
+				System.out.println("Invalid input. Please try again.");
+				in.nextLine();
+			}
+		}while (!valid);
+		
+		return amPM;
+	}
+
+	private int editHours() {
+		int hours;
+		
+		hours = Methods.getValidInteger("What is the hours portion of the time?", MIN_HOURS, MAX_HOURS);
+		
+		
+		return hours;
+	}
+	
+	private int editMinutes(){
+		int minutes;
+		
+		minutes = Methods.getValidInteger("What is the minutes portion of the time?", MIN_MINUTES , MAX_MINUTES);
+		
+		return minutes;
+	}
+
+	public void setDescription() {
+		valid = false;
+		
+		do{
+			in.nextLine();
+			System.out.println("Please describe the event.");
+			description = in.nextLine();
+			
+			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");	
+		}while (!yesNo);
+	}
+
+	public int setEventOccurence() {
+		valid = false;
+
+		do {
+			System.out.println(
+					"How often will this event happen? Enter the number corrosponding to how often the event occurs.");
+			System.out.println("[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]");
+
+			if (in.hasNextInt()) {
+				frequency = in.nextInt();
+				if (frequency >= 1 && frequency <= 5) {
+					valid = true;
+				} else {
+					System.out.println("Input out of range. Please try again.");
+				}
+			} else {
+				System.out.println("Invalid input. Please try again.");
+				in.nextLine();
+			}
+		} while (!valid);
+
+		switch (frequency) {
+		case 1:
+			occurence = EventType.Once;
+			break;
+		case 2:
+			occurence = EventType.Daily;
+			break;
+		case 3:
+			occurence = EventType.Weekly;
+			break;
+		case 4:
+			occurence = EventType.Monthly;
+			break;
+		case 5:
+			occurence = EventType.Yearly;
+			break;
+		}
+		return frequency;
+	}
+
+	public int setPriorityLevel() {
+		valid = false;
+
+		do {
+			System.out.println(
+					"How important is this event? Enter the number corrosponding to the level of importance.");
+			System.out.println("[1 - Low] [2 - Medium] [3 - High]");
+
+			if (in.hasNextInt()) {
+				significance = in.nextInt();
+				if (significance >= 1 && significance <= 5) {
+					valid = true;
+				} else {
+					System.out.println("Input out of range. Please try again.");
+				}
+			} else {
+				System.out.println("Invalid input. Please try again.");
+				in.nextLine();
+			}
+		} while (!valid);
+
+		switch (significance) {
+		case 1:
+			importance = PriorityType.LowImportance;
+			break;
+		case 2:
+			importance = PriorityType.MediumImportance;
+			break;
+		case 3:
+			importance = PriorityType.HighImportance;
+			break;
+		}
+		
+		return significance;
+	}
+	
+	public String displayTimesAndDescripiton() {
+		return "\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]"
+				+ "\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]"
+				+ "\nDescription:\n" + description;
+	}
+	
+	public void displayEventType(){
+		System.out.println("\nEvent Occurrence: ");
+		switch (frequency) {
+		case 1:
+			System.out.println("Once");
+			break;
+		case 2:
+			System.out.println("Daily");
+			break;
+		case 3:
+			System.out.println("Weekly");
+			break;
+		case 4:
+			System.out.println("Monthly");
+			break;
+		case 5:
+			System.out.println("Yearly");
+			break;
+		}
+	}
+	
+	public void displayEventPriority(){
+		System.out.println("\nEvent Priority: ");
+		switch (significance) {
+		case 1:
+			System.out.println("Low");
+			break;
+		case 2:
+			System.out.println("Medium");
+			break;
+		case 3:
+			System.out.println("High");
+			break;
+		}
+	}
 }

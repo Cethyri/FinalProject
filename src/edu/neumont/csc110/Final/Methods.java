@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Methods {
 
+	private static final int CHAR_VAL_NUM_MIN = 48, CHAR_VAL_NUM_MAX = 57;
+	
 	private static Scanner in = new Scanner(System.in);
 	private static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	
@@ -19,7 +21,7 @@ public class Methods {
 	}
 
 	public static String getValidInput(String question) {
-		System.out.print(question);
+		System.out.println(question);
 		boolean valid = false;
 
 		do {
@@ -28,11 +30,47 @@ public class Methods {
 			if (!input.isEmpty()) {
 				valid = true;
 			} else {
-				System.out.println("No valid input. " + question);
+				System.out.println("\nNo valid input. " + question);
 			}
 		} while (!valid);
 
 		return input;
+	}
+	
+	public static int getValidInteger(String question, int min, int max) {
+		System.out.println(question);
+		boolean valid = false;
+		int num = 0;
+		do {
+			input = in.nextLine();
+
+			input = onlyNum(input);
+
+			if (!input.isEmpty()) {
+				num = Integer.parseInt(input);
+
+				if (num >= min && num <= max) {
+					valid = true;
+				} else {
+					System.out.println("Out of range. " + question);
+				}
+			} else {
+				System.out.println("No valid input. " + question);
+			}
+		} while (!valid);
+
+		return num;
+	}
+	
+	private static String onlyNum(String input) {
+		String temp = "";
+		for (int x = 0; x < input.length(); x++) {
+			if (input.charAt(x) >= CHAR_VAL_NUM_MIN && input.charAt(x) <= CHAR_VAL_NUM_MAX) {
+				temp += input.charAt(x);
+			}
+		}
+
+		return temp;
 	}
 	
 	public static Date getValidDateInput(String question){
@@ -58,16 +96,35 @@ public class Methods {
 		return dateFormat;
 	}
 	
-	public static String getConfirmation(){
-		System.out.println("Y/N");
-		regex = "y|n|Y|N";
+
+	public static boolean getConfirmation(String question) {
+		question += " (yes or no)";
+		System.out.println(question);
+		boolean valid = false, answer = false;
 		
 		do {
 			input = in.nextLine();
 			
-		} while (!input.matches(regex));
+			if (!input.isEmpty()) {
+				switch(input.toLowerCase()) {
+				case "yes" :
+				case "y" :
+					answer = true;
+					valid = true;	
+					break;
+				case "no" :
+				case "n" :
+					valid = true;
+					break;
+				default :
+					System.out.println("\nUnrecognizable input. " + question);
+				}
+			} else {
+				System.out.println("\nNo valid input. " + question);
+			}
+		} while (!valid);
 		
-		return input;
+		return answer;
 	}
 	
 	public static void pauseOn(String line, boolean clearScreen) {

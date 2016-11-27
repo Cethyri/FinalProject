@@ -12,12 +12,10 @@ public class Calendar {
 	private ArrayList<Day> dates;
 
 	public Calendar() {
-		
 	}
 
 	private void addEvent(Event e) {
-		unimplemented();
-
+		unimplemented();		
 	}
 
 	private void unimplemented() {

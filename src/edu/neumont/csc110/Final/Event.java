@@ -74,7 +74,7 @@ public class Event {
 		} while (!yesNo);
 	}
 
-	public EventType EditEventOccurence() {
+	public void EditEventOccurence() {
 		valid = false;
 
 		frequency = Methods.getValidInteger(
@@ -101,10 +101,9 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - SetEventOccurence()", true);
 		}
-		return occurence;
 	}
 
-	public PriorityType EditPriorityLevel() {
+	public void EditPriorityLevel() {
 		valid = false;
 
 		significance = Methods.getValidInteger(
@@ -125,8 +124,6 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
-
-		return importance;
 	}
 
 	public void DisplayTimes() {
@@ -185,4 +182,16 @@ public class Event {
 		DisplayEventType();
 		DisplayEventPriority();
 	}
+	
+	public EventType GetEventOccurence(){
+		return occurence;
+	}
+	
+	public PriorityType GetEventPriority(){
+		return importance;
+	}
+	
+	
+	
+	
 }

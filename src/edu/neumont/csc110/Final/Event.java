@@ -9,17 +9,21 @@ public class Event {
 	private boolean valid, yesNo;
 
 	public Event() {
-		
+		EditStartTime();
+		EditEndTime();
+		EditDescription();
+		EditEventOccurence();
+		EditPriorityLevel();
 	}
 
-	public void SetStartTime() {
+	public void EditStartTime() {
 		System.out.println("[Start Time]\n");
 		startAMPM = EditTimeConventions();
 		startHours = EditHours();
 		startMinutes = EditMinutes();
 	}
 
-	public void SetEndTime() {
+	public void EditEndTime() {
 		System.out.println("[End Time]\n");
 		endAMPM = EditTimeConventions();
 		endHours = EditHours();
@@ -60,7 +64,7 @@ public class Event {
 		return minutes;
 	}
 
-	public void SetDescription() {
+	public void EditDescription() {
 		valid = false;
 
 		do {
@@ -70,7 +74,7 @@ public class Event {
 		} while (!yesNo);
 	}
 
-	public int SetEventOccurence() {
+	public EventType EditEventOccurence() {
 		valid = false;
 
 		frequency = Methods.getValidInteger(
@@ -97,10 +101,10 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - SetEventOccurence()", true);
 		}
-		return frequency;
+		return occurence;
 	}
 
-	public int SetPriorityLevel() {
+	public PriorityType EditPriorityLevel() {
 		valid = false;
 
 		significance = Methods.getValidInteger(
@@ -122,7 +126,7 @@ public class Event {
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
 
-		return significance;
+		return importance;
 	}
 
 	public void DisplayTimes() {

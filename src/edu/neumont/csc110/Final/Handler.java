@@ -12,22 +12,20 @@ public class Handler {
 	private static final String LOAD = "load", SAVE = "save", NEW = "new", ADD = "add", DELETE = "delete",
 			LIST = "list", VIEW = "veiw", QUIT = "quit", NAME = "(calendar name)", FILE_PATH = "saveFiles/";
 
-	private static final String BACK = "back";
-
 	private static final String FILE_PROB = "That file doesn't exist. Try checking the files with \"list\".";
 
 	private boolean quit, saved;
 
 	private String currentName;
-	
+
 	private Calendar C;
 
 	public Handler() {
-			currentName = null;
-			quit = false;
-			saved = true;
+		currentName = null;
+		quit = false;
+		saved = true;
 
-		}
+	}
 
 	public void interact() {
 		String input, action, name;
@@ -100,7 +98,12 @@ public class Handler {
 			list();
 			break;
 		case VIEW:
-			veiw();
+			if (currentName != null) {
+				C.veiw();				
+			}
+			else {
+				Methods.pauseOn("No calendar selected, make a new calendar or load one before veiwing", true);
+			}
 			break;
 		case QUIT:
 			quit();
@@ -177,13 +180,15 @@ public class Handler {
 		if (!name.isEmpty()) {
 			File f = new File(FILE_PATH + name + ".sav");
 
-			if (f.exists()) {
+			if (f.exists() && currentName != null) {
 
 				System.out.println("This file already exists.");
 				if (Methods.getConfirmation("would you like to save over it?")) {
 					save(name);
 				}
 
+			} else if (f.exists()) {
+				Methods.pauseOn("This file already exists. Use a different name, or load this file.", true);
 			} else {
 				try {
 
@@ -191,6 +196,7 @@ public class Handler {
 
 					ObjectOutputStream save = new ObjectOutputStream(saveFile);
 
+					C = new Calendar(name);
 					save.writeObject(C);
 					currentName = name;
 
@@ -200,7 +206,7 @@ public class Handler {
 
 				} catch (Exception e) {
 					Methods.pauseOn("That file name is invalid.", true);
-					// error(e);
+					 error(e);
 				}
 			}
 		} else {
@@ -313,57 +319,12 @@ public class Handler {
 		}
 	}
 
-	public void veiw() {
-		String input;
-
-		do {
-			input = Methods.getValidInput(veiwMenu());
-			input = input.toLowerCase();
-
-			veiwAction(input);
-
-		} while (!quit);
-	}
-
-	private String veiwMenu() {
-		String menu = "";
-		menu += "What would you like to do?";
-		menu += "\t\t";
-		if (currentName != null) {
-			menu += "Current calendar: " + currentName;
-		} else {
-			menu += " No calendar selected";
-		}
-		menu += "\n\n";
-		menu += "\tInput - result\n\n";
-		menu += "\t" + BACK + " - return to the file menu\n";
-		menu += "\t" + QUIT + " - exit the program\n";
-		return menu;
-	}
-
-	private void veiwAction(String action) {
-		switch (action) {
-		case BACK:
-			interact();
-			break;
-		case QUIT:
-			quit();
-			break;
-		default:
-			Methods.pauseOn("Please enter an input provided.", true);
-		}
-	}
-
-	private void addEvent(Event e) {
-		unimplemented();
-	}
-
 	private void unimplemented() {
 		Methods.pauseOn("UNINPLEMENTED", true);
 	}
 
 	private void error(Exception exc) {
-		// exc.printStackTrace();
-		Methods.pauseOn("An error occured", true);
+		exc.printStackTrace();
+		//Methods.pauseOn("An error occured", true);
 	}
 }

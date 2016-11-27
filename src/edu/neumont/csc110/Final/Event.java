@@ -178,4 +178,11 @@ public class Event {
 			Methods.pauseOn("Something went wrong - DisplayEventPriority()", true);
 		}
 	}
+	
+	public void DisplayAll() {
+		DisplayTimes();
+		DisplayDescription();
+		DisplayEventType();
+		DisplayEventPriority();
+	}
 }

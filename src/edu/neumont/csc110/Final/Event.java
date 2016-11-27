@@ -9,7 +9,7 @@ public class Event {
 	private boolean valid, yesNo;
 
 	public Event() {
-
+		
 	}
 
 	public void SetStartTime() {

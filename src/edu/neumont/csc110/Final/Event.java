@@ -1,5 +1,7 @@
 package edu.neumont.csc110.Final;
 
+import java.util.Date;
+
 public class Event {
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
@@ -7,8 +9,10 @@ public class Event {
 	private PriorityType importance;
 	private String description, startAMPM, endAMPM;
 	private boolean valid, yesNo;
+	private Date eventDate;
 
 	public Event() {
+		EditEventDate();
 		EditStartTime();
 		EditEndTime();
 		EditDescription();
@@ -16,15 +20,19 @@ public class Event {
 		EditPriorityLevel();
 	}
 
+	public void EditEventDate(){
+		eventDate = Methods.getValidDateInput("What date does this event occur on?");
+	}
+	
 	public void EditStartTime() {
-		System.out.println("[Start Time]\n");
+		System.out.println("\n[Start Time]\n");
 		startAMPM = EditTimeConventions();
 		startHours = EditHours();
 		startMinutes = EditMinutes();
 	}
 
 	public void EditEndTime() {
-		System.out.println("[End Time]\n");
+		System.out.println("\n[End Time]\n");
 		endAMPM = EditTimeConventions();
 		endHours = EditHours();
 		endMinutes = EditMinutes();
@@ -68,19 +76,17 @@ public class Event {
 		valid = false;
 
 		do {
-			description = Methods.getValidInput("Please describe the event.");
+			description = Methods.getValidInput("\nPlease describe the event.");
 
-			yesNo = Methods.getConfirmation("You entered : \n" + description + "\n\nIs this correct?");
+			yesNo = Methods.getConfirmation("\nYou entered : \n" + description + "\n\nIs this correct?");
 		} while (!yesNo);
 	}
 
-	public EventType EditEventOccurence() {
+	public void EditEventOccurence() {
 		valid = false;
 
-		frequency = Methods.getValidInteger(
-				"How often will this event happen? Enter the number corrosponding to how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]",
-				1,
-				5);
+		frequency = Methods.getValidInteger("\nHow often will this event happen? Enter the number corrosponding to "
+				+ "how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]", 1, 5);
 
 		switch (frequency) {
 		case 1:
@@ -101,16 +107,13 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - SetEventOccurence()", true);
 		}
-		return occurence;
 	}
 
-	public PriorityType EditPriorityLevel() {
+	public void EditPriorityLevel() {
 		valid = false;
 
-		significance = Methods.getValidInteger(
-				"How important is this event happen? Enter the number corrosponding to the level of importance.\n[1 - Low] [2 - Medium] [3 - High]",
-				1,
-				3);
+		significance = Methods.getValidInteger("\nHow important is this event happen? Enter the number "
+				+ "corrosponding to the level of importance.\n[1 - Low] [2 - Medium] [3 - High]", 1, 3);
 
 		switch (significance) {
 		case 1:
@@ -125,10 +128,13 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
-
-		return importance;
 	}
 
+	public void DisplayEventDate(){
+		System.out.println("\nEvent Date:");
+		System.out.println(eventDate);
+	}
+	
 	public void DisplayTimes() {
 		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
 		System.out.println("\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
@@ -177,5 +183,25 @@ public class Event {
 		default:
 			Methods.pauseOn("Something went wrong - DisplayEventPriority()", true);
 		}
+	}
+	
+	public void DisplayAll() {
+		DisplayEventDate();
+		DisplayTimes();
+		DisplayDescription();
+		DisplayEventType();
+		DisplayEventPriority();
+	}
+	
+	public EventType GetEventOccurence(){
+		return occurence;
+	}
+	
+	public PriorityType GetEventPriority(){
+		return importance;
+	}
+	
+	public Date GetDate(){
+		return eventDate;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
-public class Calendar implements Serializable {
+public class CalendarHandler implements Serializable {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class Calendar implements Serializable {
 
 	private EventHandler EH;
 
-	public Calendar(String name) {
+	public CalendarHandler(String name) {
 		back = false;
 
 		this.name = name;

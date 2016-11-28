@@ -204,6 +204,4 @@ public class Event {
 	public Date GetDate(){
 		return eventDate;
 	}
-	
-	
 }

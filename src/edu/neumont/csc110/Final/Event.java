@@ -11,13 +11,8 @@ public class Event {
 	private boolean valid, yesNo;
 	private Date eventDate;
 
-	public Event() {
-		EditEventDate();
-		EditStartTime();
-		EditEndTime();
-		EditDescription();
-		EditEventOccurence();
-		EditPriorityLevel();
+	public Event(){
+		
 	}
 
 	public void EditEventDate(){
@@ -129,7 +124,16 @@ public class Event {
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
 	}
-
+	
+	public void EditAll(){
+		EditEventDate();
+		EditStartTime();
+		EditEndTime();
+		EditDescription();
+		EditEventOccurence();
+		EditPriorityLevel();
+	}
+	
 	public void DisplayEventDate(){
 		System.out.println("\nEvent Date:");
 		System.out.println(Methods.getNewDateString());

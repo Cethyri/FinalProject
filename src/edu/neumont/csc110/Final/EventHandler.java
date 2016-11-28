@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Dates {
+public class EventHandler{
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private Scanner in = new Scanner(System.in);

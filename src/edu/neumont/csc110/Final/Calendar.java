@@ -6,28 +6,35 @@ import java.util.Date;
 
 @SuppressWarnings("deprecation")
 public class Calendar implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final int BI_MONTH_I = 2, MONTH_I = 1, WEEK_I = 0;
+
+	private static final int[] WIDTH = { 6, 9, 11 }, HEIGHT = { 4, 3, 2 };
+
+	private static final String[] EVENT_DISP = { "E#:", "Event:", "Events: " },
+			PRIORITY_DISP = { "", "Priority:", "Priorities:" };
+
 	private static final String DAY = "day", WEEK = "week", MONTH = "month", BI_MONTH = "bi-month", BACK = "back";
-	
+
 	private boolean back;
-	
+
 	private String name;
-	
+
 	private Date start;
 
 	private Dates dates;
 
 	public Calendar(String name) {
 		back = false;
-		
+
 		this.name = name;
 	}
-	
+
 	public void veiw() {
 		String input;
 
@@ -58,6 +65,16 @@ public class Calendar implements Serializable {
 	private void veiwAction(String action) {
 		switch (action) {
 		case BI_MONTH:
+		case MONTH:
+		case WEEK:
+		case DAY:
+			start = Methods.getValidDateInput("When would you like the veiw to start");
+		default:
+			//nothin'
+		}
+
+		switch (action) {
+		case BI_MONTH:
 			veiwBiMonth();
 			break;
 		case MONTH:
@@ -67,7 +84,7 @@ public class Calendar implements Serializable {
 			veiwWeek();
 			break;
 		case DAY:
-			veiwDay();
+			dates.veiwDay(start);
 			break;
 		case BACK:
 			back = true;
@@ -77,20 +94,16 @@ public class Calendar implements Serializable {
 		}
 	}
 
-	private void veiwDay() {
-		
-	}
-
 	private void veiwWeek() {
-		
+
 	}
 
 	private void veiwMonth() {
-		
+
 	}
 
 	private void veiwBiMonth() {
-		
+
 	}
 
 	private void addEvent(Event e) {

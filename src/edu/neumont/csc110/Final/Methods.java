@@ -76,6 +76,7 @@ public class Methods {
 	
 	public static Date getValidDateInput(String question){
 		System.out.print(question);
+		System.out.println("Ex. MM/DD/YYYY, 1/1/1111, 01/01/1111\n");
 
 		input = in.nextLine();
 		
@@ -84,7 +85,7 @@ public class Methods {
 
 		while (!input.matches(regex)) {
 
-			System.out.println("Please enter a date.\nEx. MM/DD/YYYY, 1/1/1111, 01/01/1111");
+			System.out.println("Please enter a date.\nEx. MM/DD/YYYY, 1/1/1111, 01/01/1111\n" + question);
 			input = in.nextLine();
 		}
 		

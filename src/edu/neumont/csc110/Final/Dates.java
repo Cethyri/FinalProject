@@ -20,17 +20,7 @@ public class Dates {
 
 
 	public void addEvent() {
-		Methods.getValidDateInput("What date would you like this event to take place on?");
 
-		do {
-		Methods.getValidInput("What would you like to add?\n");
-		
-		Methods.getConfirmation("Is this correct:\n" + Methods.getLastInput());
-		} while(Methods.getAnswer() == false);
-		
-//		dates.add(e);
-//		event.add(Methods.getLastInput());
-		//return getInput into array list
 	}
 
 	public void removeEvent() {

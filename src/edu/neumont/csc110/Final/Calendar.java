@@ -76,20 +76,6 @@ public class Calendar implements Serializable {
 			Methods.pauseOn("Please enter an input provided.", true);
 		}
 	}
-	
-	private void getYear() {
-		Date current = new Date();
-		Methods.getValidInteger("What year? (MM)", current.getYear(), Integer.MAX_VALUE);
-	}
-
-	private void getMonth() {
-		Methods.getValidInteger("What month? (MM)", 0, 11);
-	}
-	
-	private void getDay(int Month) {
-		Methods.getValidInteger("What day? (MM)", 0, 11);
-	}
-	
 
 	private void veiwDay() {
 		
@@ -117,10 +103,8 @@ public class Calendar implements Serializable {
 	}
 
 	public void Combine(Calendar C) {
-		for (Day d : C.getDates()) {
-			for (Event e : d.getEvents()) {
-				addEvent(e);
-			}
+		for (Event e : C.getDates().getEvents()) {
+			addEvent(e);
 		}
 	}
 

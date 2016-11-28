@@ -10,7 +10,6 @@ public class Day {
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private Scanner in = new Scanner(System.in);
 	
-	private ArrayList<Event> event;
 
 	public void dateAndTime() {
 
@@ -28,9 +27,6 @@ public class Day {
 		Methods.getConfirmation("Is this correct:\n" + Methods.getLastInput());
 		} while(Methods.getAnswer() == false);
 		
-//		dates.add(e);
-//		event.add(Methods.getLastInput());
-		//return getInput into array list
 	}
 
 	public void removeEvent() {

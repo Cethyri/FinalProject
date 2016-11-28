@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Day {
+public class Dates {
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private Scanner in = new Scanner(System.in);
 	
+	private ArrayList<Event> event;
 
 	public void dateAndTime() {
 
@@ -19,7 +20,7 @@ public class Day {
 
 
 	public void addEvent() {
-		
+
 	}
 
 	public void removeEvent() {
@@ -29,5 +30,8 @@ public class Day {
 
 	}
 	
+	public ArrayList<Event> getEvents() {
+		return event;
+	}
 	
 }

@@ -2,16 +2,25 @@ package edu.neumont.csc110.Final;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Calendar implements Serializable{
+@SuppressWarnings("deprecation")
+public class Calendar implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String DAY = "day", WEEK = "week", MONTH = "month", BI_MONTH = "bi-month", BACK = "back";
 	
 	private boolean back;
 	
 	private String name;
+	
+	private Date start;
 
-	private ArrayList<Day> dates;
+	private Dates dates;
 
 	public Calendar(String name) {
 		back = false;
@@ -38,27 +47,27 @@ public class Calendar implements Serializable{
 		menu += "Current calendar: " + name;
 		menu += "\n\n";
 		menu += "\tInput - result\n\n";
-		menu += "\t" + DAY + " - veiw a day\n";
-		menu += "\t" + WEEK + " - veiw a week\n";
-		menu += "\t" + MONTH + " - veiw a month\n";
 		menu += "\t" + BI_MONTH + " - veiw two months\n";
+		menu += "\t" + MONTH + " - veiw a month\n";
+		menu += "\t" + WEEK + " - veiw a week\n";
+		menu += "\t" + DAY + " - veiw a day\n";
 		menu += "\t" + BACK + " - return to the file menu\n";
 		return menu;
 	}
 
 	private void veiwAction(String action) {
 		switch (action) {
-		case DAY:
-			veiwDay();
-			break;
-		case WEEK:
-			veiwWeek();
+		case BI_MONTH:
+			veiwBiMonth();
 			break;
 		case MONTH:
 			veiwMonth();
 			break;
-		case BI_MONTH:
-			veiwBiMonth();
+		case WEEK:
+			veiwWeek();
+			break;
+		case DAY:
+			veiwDay();
 			break;
 		case BACK:
 			back = true;
@@ -94,14 +103,12 @@ public class Calendar implements Serializable{
 	}
 
 	public void Combine(Calendar C) {
-		for (Day d : C.getDates()) {
-			for (Event e : d.getEvents()) {
-				addEvent(e);
-			}
+		for (Event e : C.getDates().getEvents()) {
+			addEvent(e);
 		}
 	}
 
-	private ArrayList<Day> getDates() {
+	private Dates getDates() {
 		return dates;
 	}
 }

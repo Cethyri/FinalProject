@@ -15,6 +15,7 @@ public class Methods {
 	private static Boolean answer = false;
 	private static String input;
 	private static Date dateFormat;
+	private static String newDateString;
 
 	public Methods() {
 
@@ -76,20 +77,20 @@ public class Methods {
 	public static Date getValidDateInput(String question){
 		System.out.print(question);
 
-		String eventDate = in.nextLine();
+		input = in.nextLine();
 		
 		String regex = "(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])/([0-9]{4}$)"; 
 		/*limits input  months 1 - 12, limits days 1-31, limits year to 4 digits*/
 
-		while (!eventDate.matches(regex)) {
+		while (!input.matches(regex)) {
 
 			System.out.println("Please enter a date.\nEx. MM/DD/YYYY, 1/1/1111, 01/01/1111");
-			eventDate = in.nextLine();
+			input = in.nextLine();
 		}
 		
 		try {
-			dateFormat = formatter.parse(eventDate);
-			String newDateString = formatter.format(dateFormat);
+			dateFormat = formatter.parse(input);
+			newDateString = formatter.format(dateFormat);
 			System.out.println(newDateString);
 		} catch (ParseException e) { }
 		
@@ -151,6 +152,10 @@ public class Methods {
 	
 	public static boolean getAnswer(){
 		return answer;
+	}
+
+	public static String getNewDateString() {
+		return newDateString;
 	}
 	
 }

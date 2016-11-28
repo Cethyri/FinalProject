@@ -19,13 +19,6 @@ public class Day {
 
 
 	public void addEvent() {
-		Methods.getValidDateInput("What date would you like this event to take place on?");
-
-		do {
-		Methods.getValidInput("What would you like to add?\n");
-		
-		Methods.getConfirmation("Is this correct:\n" + Methods.getLastInput());
-		} while(Methods.getAnswer() == false);
 		
 	}
 
@@ -36,8 +29,5 @@ public class Day {
 
 	}
 	
-	public ArrayList<Event> getEvents() {
-		return event;
-	}
 	
 }

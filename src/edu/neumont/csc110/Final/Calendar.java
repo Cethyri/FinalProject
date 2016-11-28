@@ -12,7 +12,7 @@ public class Calendar implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final int BI_MONTH_I = 2, MONTH_I = 1, WEEK_I = 0;
+	private static final int BI_MONTH_I = 2, MONTH_I = 1, WEEK_I = 0, SPACER_LENGTH = 7;
 
 	private static final int[] WIDTH = { 6, 9, 11 }, HEIGHT = { 4, 3, 2 };
 
@@ -27,7 +27,7 @@ public class Calendar implements Serializable {
 
 	private Date start;
 
-	private Dates dates;
+	private EventHandler EH;
 
 	public Calendar(String name) {
 		back = false;
@@ -84,7 +84,7 @@ public class Calendar implements Serializable {
 			veiwWeek();
 			break;
 		case DAY:
-			dates.veiwDay(start);
+			EH.veiwDay(start);
 			break;
 		case BACK:
 			back = true;
@@ -95,7 +95,7 @@ public class Calendar implements Serializable {
 	}
 
 	private void veiwWeek() {
-
+		
 	}
 
 	private void veiwMonth() {
@@ -121,7 +121,7 @@ public class Calendar implements Serializable {
 		}
 	}
 
-	private Dates getDates() {
-		return dates;
+	private EventHandler getDates() {
+		return EH;
 	}
 }

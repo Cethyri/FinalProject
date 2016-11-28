@@ -132,7 +132,7 @@ public class Event {
 
 	public void DisplayEventDate(){
 		System.out.println("\nEvent Date:");
-		System.out.println(eventDate);
+		System.out.println(Methods.getNewDateString());
 	}
 	
 	public void DisplayTimes() {

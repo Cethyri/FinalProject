@@ -15,6 +15,7 @@ public class Methods {
 	private static Boolean answer = false;
 	private static String input;
 	private static Date dateFormat;
+	private static String newDateString;
 
 	public Methods() {
 
@@ -89,7 +90,7 @@ public class Methods {
 		
 		try {
 			dateFormat = formatter.parse(input);
-			String newDateString = formatter.format(dateFormat);
+			newDateString = formatter.format(dateFormat);
 			System.out.println(newDateString);
 		} catch (ParseException e) { }
 		
@@ -151,6 +152,10 @@ public class Methods {
 	
 	public static boolean getAnswer(){
 		return answer;
+	}
+
+	public static String getNewDateString() {
+		return newDateString;
 	}
 	
 }

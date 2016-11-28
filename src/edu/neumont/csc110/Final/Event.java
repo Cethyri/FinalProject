@@ -1,5 +1,6 @@
 package edu.neumont.csc110.Final;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Event {
@@ -9,7 +10,7 @@ public class Event {
 	private PriorityType importance;
 	private String description, startAMPM, endAMPM;
 	private boolean valid, yesNo;
-	private Date eventDate;
+	private Calendar eventDate;
 
 	public Event(){
 		
@@ -205,7 +206,7 @@ public class Event {
 		return importance;
 	}
 	
-	public Date getDate(){
+	public CalendargetDate(){
 		return eventDate;
 	}
 }

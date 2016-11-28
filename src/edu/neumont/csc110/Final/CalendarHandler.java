@@ -2,6 +2,7 @@ package edu.neumont.csc110.Final;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
@@ -25,7 +26,7 @@ public class CalendarHandler implements Serializable {
 
 	private String name;
 
-	private Date start;
+	private Calendar start;
 
 	private EventHandler EH;
 
@@ -115,7 +116,7 @@ public class CalendarHandler implements Serializable {
 		Methods.pauseOn("UNINPLEMENTED", true);
 	}
 
-	public void Combine(Calendar C) {
+	public void Combine(CalendarHandler C) {
 		for (Event e : C.getDates().getEvents()) {
 			addEvent(e);
 		}

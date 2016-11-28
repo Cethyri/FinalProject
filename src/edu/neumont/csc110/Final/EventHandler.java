@@ -14,7 +14,7 @@ public class EventHandler{
 
 	public void dateAndTime() {
 
-		Date currentTime = new Date();
+		CalendarcurrentTime = new Date();
 		System.out.println(formatter.format(currentTime));
 	}
 

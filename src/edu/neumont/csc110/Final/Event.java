@@ -15,25 +15,25 @@ public class Event {
 		
 	}
 
-	public void EditEventDate(){
+	public void editEventDate(){
 		eventDate = Methods.getValidDateInput("What date does this event occur on?");
 	}
 	
-	public void EditStartTime() {
+	public void editStartTime() {
 		System.out.println("\n[Start Time]\n");
-		startAMPM = EditTimeConventions();
-		startHours = EditHours();
-		startMinutes = EditMinutes();
+		startAMPM = editTimeConventions();
+		startHours = editHours();
+		startMinutes = editMinutes();
 	}
 
-	public void EditEndTime() {
+	public void editEndTime() {
 		System.out.println("\n[End Time]\n");
-		endAMPM = EditTimeConventions();
-		endHours = EditHours();
-		endMinutes = EditMinutes();
+		endAMPM = editTimeConventions();
+		endHours = editHours();
+		endMinutes = editMinutes();
 	}
 
-	private String EditTimeConventions() {
+	private String editTimeConventions() {
 		String amPM;
 		valid = false;
 
@@ -51,7 +51,7 @@ public class Event {
 		return amPM;
 	}
 
-	private int EditHours() {
+	private int editHours() {
 		int hours;
 
 		hours = Methods.getValidInteger("What is the hours portion of the time?", MIN_HOURS, MAX_HOURS);
@@ -59,7 +59,7 @@ public class Event {
 		return hours;
 	}
 
-	private int EditMinutes() {
+	private int editMinutes() {
 		int minutes;
 
 		minutes = Methods.getValidInteger("What is the minutes portion of the time?", MIN_MINUTES, MAX_MINUTES);
@@ -67,7 +67,7 @@ public class Event {
 		return minutes;
 	}
 
-	public void EditDescription() {
+	public void editDescription() {
 		valid = false;
 
 		do {
@@ -77,7 +77,7 @@ public class Event {
 		} while (!yesNo);
 	}
 
-	public void EditEventOccurence() {
+	public void editEventOccurence() {
 		valid = false;
 
 		frequency = Methods.getValidInteger("\nHow often will this event happen? Enter the number corrosponding to "
@@ -104,7 +104,7 @@ public class Event {
 		}
 	}
 
-	public void EditPriorityLevel() {
+	public void editPriorityLevel() {
 		valid = false;
 
 		significance = Methods.getValidInteger("\nHow important is this event happen? Enter the number "
@@ -125,31 +125,31 @@ public class Event {
 		}
 	}
 	
-	public void EditAll(){
-		EditEventDate();
-		EditStartTime();
-		EditEndTime();
-		EditDescription();
-		EditEventOccurence();
-		EditPriorityLevel();
+	public void editAll(){
+		editEventDate();
+		editStartTime();
+		editEndTime();
+		editDescription();
+		editEventOccurence();
+		editPriorityLevel();
 	}
 	
-	public void DisplayEventDate(){
+	public void displayEventDate(){
 		System.out.println("\nEvent Date:");
 		System.out.println(Methods.getNewDateString());
 	}
 	
-	public void DisplayTimes() {
+	public void displayTimes() {
 		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
 		System.out.println("\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
 
-	public void DisplayDescription() {
+	public void displayDescription() {
 		System.out.println("\nDescription:");
 		System.out.println(description);
 	}
 
-	public void DisplayEventType() {
+	public void displayEventType() {
 		System.out.println("\nEvent Occurrence: ");
 		switch (frequency) {
 		case 1:
@@ -172,7 +172,7 @@ public class Event {
 		}
 	}
 
-	public void DisplayEventPriority() {
+	public void displayEventPriority() {
 		System.out.println("\nEvent Priority: ");
 		switch (significance) {
 		case 1:
@@ -189,23 +189,23 @@ public class Event {
 		}
 	}
 	
-	public void DisplayAll() {
-		DisplayEventDate();
-		DisplayTimes();
-		DisplayDescription();
-		DisplayEventType();
-		DisplayEventPriority();
+	public void displayAll() {
+		displayEventDate();
+		displayTimes();
+		displayDescription();
+		displayEventType();
+		displayEventPriority();
 	}
 	
-	public EventType GetEventOccurence(){
+	public EventType getEventOccurence(){
 		return occurence;
 	}
 	
-	public PriorityType GetEventPriority(){
+	public PriorityType getEventPriority(){
 		return importance;
 	}
 	
-	public Date GetDate(){
+	public Date getDate(){
 		return eventDate;
 	}
 }

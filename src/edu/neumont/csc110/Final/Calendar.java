@@ -11,7 +11,7 @@ public class Calendar implements Serializable{
 	
 	private String name;
 
-	private ArrayList<Day> dates;
+	private ArrayList<EvenstHandler> dates;
 
 	public Calendar(String name) {
 		back = false;
@@ -94,14 +94,14 @@ public class Calendar implements Serializable{
 	}
 
 	public void Combine(Calendar C) {
-		for (Day d : C.getDates()) {
+		for (EvenstHandler d : C.getDates()) {
 			for (Event e : d.getEvents()) {
 				addEvent(e);
 			}
 		}
 	}
 
-	private ArrayList<Day> getDates() {
+	private ArrayList<EvenstHandler> getDates() {
 		return dates;
 	}
 }

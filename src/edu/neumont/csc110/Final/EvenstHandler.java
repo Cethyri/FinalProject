@@ -3,31 +3,29 @@ package edu.neumont.csc110.Final;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
-public class Day {
+public class EvenstHandler {
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-	private Scanner in = new Scanner(System.in);
-	
+	private ArrayList<Event> eventList;
 
-	public void dateAndTime() {
-
+	public EvenstHandler() {
 		Date currentTime = new Date();
 		System.out.println(formatter.format(currentTime));
 	}
 
-
-	public void addEvent() {
+	public void interactWithEvents() {
 		
 	}
-
-	public void removeEvent() {
-	}
-
-	public void interactWithEvents() {
-
+	
+	private boolean addToEvent(Event newEvent){
+		//eventList.add(e.displayAll());
+		
+		return true;
 	}
 	
+	public ArrayList<Event> getEvents() {
+		return eventList;
+	}
 	
 }

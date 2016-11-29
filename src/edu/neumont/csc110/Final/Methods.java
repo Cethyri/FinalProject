@@ -2,6 +2,7 @@ package edu.neumont.csc110.Final;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class Methods {
 	private static Boolean answer = false;
 	private static String input;
 	private static Date dateFormat;
+	private static Calendar date;
 	private static String newDateString;
 
 	public Methods() {
@@ -91,8 +93,6 @@ public class Methods {
 		
 		try {
 			dateFormat = formatter.parse(input);
-			newDateString = formatter.format(dateFormat);
-			System.out.println(newDateString);
 		} catch (ParseException e) { }
 		
 		return dateFormat;

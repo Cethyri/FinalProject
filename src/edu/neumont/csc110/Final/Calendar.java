@@ -2,11 +2,10 @@ package edu.neumont.csc110.Final;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
-public class CalendarHandler implements Serializable {
+public class Calendar extends java.util.Calendar implements Serializable {
 
 	/**
 	 * 
@@ -26,11 +25,11 @@ public class CalendarHandler implements Serializable {
 
 	private String name;
 
-	private Calendar start;
+	private Date start;
 
 	private EventHandler EH;
 
-	public CalendarHandler(String name) {
+	public Calendar(String name) {
 		back = false;
 
 		this.name = name;
@@ -116,7 +115,7 @@ public class CalendarHandler implements Serializable {
 		Methods.pauseOn("UNINPLEMENTED", true);
 	}
 
-	public void Combine(CalendarHandler C) {
+	public void Combine(Calendar C) {
 		for (Event e : C.getDates().getEvents()) {
 			addEvent(e);
 		}
@@ -124,5 +123,53 @@ public class CalendarHandler implements Serializable {
 
 	private EventHandler getDates() {
 		return EH;
+	}
+
+	@Override
+	public void add(int field, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void computeFields() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void computeTime() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getGreatestMinimum(int field) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLeastMaximum(int field) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getMaximum(int field) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getMinimum(int field) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void roll(int field, boolean up) {
+		// TODO Auto-generated method stub
+		
 	}
 }

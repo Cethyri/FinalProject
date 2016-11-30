@@ -7,9 +7,6 @@ import java.util.Date;
 @SuppressWarnings("deprecation")
 public class Calendar extends java.util.Calendar implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static final int BI_MONTH_I = 2, MONTH_I = 1, WEEK_I = 0, SPACER_LENGTH = 7;
@@ -24,8 +21,6 @@ public class Calendar extends java.util.Calendar implements Serializable {
 	private boolean back;
 
 	private String name;
-
-	private Date start;
 
 	private EventHandler EH;
 
@@ -63,28 +58,33 @@ public class Calendar extends java.util.Calendar implements Serializable {
 	}
 
 	private void veiwAction(String action) {
+		Date start;
 		switch (action) {
 		case BI_MONTH:
 		case MONTH:
 		case WEEK:
 		case DAY:
-			start = Methods.getValidDateInput("When would you like the veiw to start");
+			start = Methods.getValidDateInput("When would you like the veiw to start?\nDates will be shifted backwards to fit the veiw.\nEx: 11/12/2016 will be shifted to 11/01/2016 for veiwing a month.");
+			setTime(start);
 		default:
 			//nothin'
 		}
-
+		
 		switch (action) {
 		case BI_MONTH:
+			set(DAY_OF_MONTH, 1);
 			veiwBiMonth();
 			break;
 		case MONTH:
+			set(DAY_OF_MONTH, 1);
 			veiwMonth();
 			break;
 		case WEEK:
+			set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
 			veiwWeek();
 			break;
 		case DAY:
-			EH.veiwDay(start);
+			EH.veiwDay(getTime());
 			break;
 		case BACK:
 			back = true;

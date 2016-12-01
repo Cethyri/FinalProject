@@ -6,25 +6,24 @@ import java.util.Date;
 
 public class Event implements Serializable {
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
-	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
+	private int startHours, startMinutes, endHours, endMinutes;
 	private EventType occurrence;
 	private PriorityType importance;
 	private String description, startAMPM, endAMPM, eventTitle, dateString;
 	private boolean valid, yesNo;
 	private Date eventDate;
-	
+
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	
 	
 	public Event() {
-		
+
 	}
-	
-	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
-			int frequency, int significance, EventType occurrence, PriorityType importance,
-			String description, String startAMPM, String endAMPM, String eventTitle, Date eventDate, String dateString){
-		
-		this.significance = significance;
+
+	public Event(int startHours, int startMinutes, int endHours, int endMinutes, int frequency, int significance,
+			EventType occurrence, PriorityType importance, String description, String startAMPM, String endAMPM,
+			String eventTitle, Date eventDate) {
+
 		this.occurrence = occurrence;
 		this.importance = importance;
 		this.startAMPM = startAMPM;
@@ -33,24 +32,25 @@ public class Event implements Serializable {
 		this.startMinutes = startMinutes;
 		this.endHours = endHours;
 		this.endMinutes = endMinutes;
-		this.frequency = frequency;
 		this.description = description;
 		this.eventTitle = eventTitle;
 		this.eventDate = eventDate;
 		this.dateString = dateString;
 	}
-	public void editTitle(){
+
+	public void editTitle() {
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
-	public void displayTitle(){
+
+	public void displayTitle() {
 		System.out.println("\nTitle:\n" + eventTitle);
 	}
-	
-	public void editEventDate(){
+
+	public void editEventDate() {
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
 		dateString = formatter.format(eventDate);
 	}
-	
+
 	private void editStartTime() {
 		System.out.println("\n[Start Time]\n");
 		startAMPM = editTimeConventions();
@@ -60,9 +60,18 @@ public class Event implements Serializable {
 
 	private void editEndTime() {
 		System.out.println("\n[End Time]\n");
-		endAMPM = editTimeConventions();
-		endHours = editHours();
-		endMinutes = editMinutes();
+		do {
+			endAMPM = editTimeConventions();
+			endHours = editHours();
+			endMinutes = editMinutes();				
+			if ((startAMPM == endAMPM && startHours > endHours)
+				|| (startAMPM == endAMPM && (startHours == endHours && startMinutes > endMinutes))
+				|| (startAMPM.equals("pm") && endAMPM.equals("am"))){
+				valid = false;
+				System.out.println("You entered a time that would make the event end before it starts. Please try again.");
+			}
+		} while (!valid);
+
 	}
 
 	private String editTimeConventions() {
@@ -75,8 +84,7 @@ public class Event implements Serializable {
 			amPM = amPM.toLowerCase();
 			if (amPM.equals("am") || amPM.equals("pm")) {
 				valid = true;
-			} 
-			else {
+			} else {
 				System.out.println("Invalid input. Please try again.");
 			}
 		} while (!valid);
@@ -112,9 +120,12 @@ public class Event implements Serializable {
 
 	private void editEventOccurence() {
 		valid = false;
+		int frequency = 0;
 
-		frequency = Methods.getValidInteger("\nHow often will this event happen? Enter the number corrosponding to "
-				+ "how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]", 1, 5);
+		frequency = Methods.getValidInteger(
+				"\nHow often will this event happen? Enter the number corrosponding to "
+						+ "how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]",
+				1, 5);
 
 		switch (frequency) {
 		case 1:
@@ -139,6 +150,7 @@ public class Event implements Serializable {
 
 	private void editPriorityLevel() {
 		valid = false;
+		int significance = 0;
 
 		significance = Methods.getValidInteger("\nHow important is this event happen? Enter the number "
 				+ "corrosponding to the level of importance.\n[1 - Low] [2 - Medium] [3 - High]", 1, 3);
@@ -157,8 +169,8 @@ public class Event implements Serializable {
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
 		}
 	}
-	
-	public void editAll(){
+
+	public void editAll() {
 		editEventDate();
 		editTitle();
 		editStartTime();
@@ -167,13 +179,13 @@ public class Event implements Serializable {
 		editEventOccurence();
 		editPriorityLevel();
 	}
-	
-	private void displayEventDate(){
+
+	private void displayEventDate() {
 		System.out.println("\nEvent Date:\n" + Methods.getLastDateString());
 	}
-	
+
 	private void displayTimes() {
-		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]" 
+		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]"
 				+ "\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
 
@@ -183,44 +195,14 @@ public class Event implements Serializable {
 
 	private void displayEventType() {
 		System.out.println("\nEvent Occurrence: ");
-		switch (frequency) {
-		case 1:
-			System.out.println("Once");
-			break;
-		case 2:
-			System.out.println("Daily");
-			break;
-		case 3:
-			System.out.println("Weekly");
-			break;
-		case 4:
-			System.out.println("Monthly"); // discuss, get rid of
-			break;
-		case 5:
-			System.out.println("Yearly");
-			break;
-		default:
-			Methods.pauseOn("Something went wrong - DisplayEventType()", true);
-		}
+		System.out.println(occurrence.name());
 	}
 
 	private void displayEventPriority() {
 		System.out.println("\nEvent Priority: ");
-		switch (significance) {
-		case 1:
-			System.out.println("Low\n");
-			break;
-		case 2:
-			System.out.println("Medium\n");
-			break;
-		case 3:
-			System.out.println("High\n");
-			break;
-		default:
-			Methods.pauseOn("Something went wrong - DisplayEventPriority()", true);
-		}
+		System.out.println(importance.name());
 	}
-	
+
 	public void displayAll() {
 		displayEventDate();
 		displayTitle();
@@ -229,19 +211,19 @@ public class Event implements Serializable {
 		displayEventType();
 		displayEventPriority();
 	}
-	
-	public EventType getEventOccurence(){
+
+	public EventType getEventOccurence() {
 		return occurrence;
 	}
-	
-	public PriorityType getEventPriority(){
+
+	public PriorityType getEventPriority() {
 		return importance;
 	}
-	
-	public Date getDate(){
+
+	public Date getDate() {
 		return eventDate;
 	}
-	
+
 	public String getEventTitle() {
 		return eventTitle;
 	}
@@ -254,5 +236,16 @@ public class Event implements Serializable {
 				+ "\nDescription:\n\t" + description + "\nPriority Level - " + importance.name() 
 				+ "\nOccurrence Level - " + occurrence.name() + "\n";
 	}
-
+	
+	public boolean checkReoccursOn(Date recursiveDate) {
+		boolean checkDate;
+		if (occurrence == EventType.MONTHLY && (eventDate == recursiveDate)){
+			checkDate = true;
+		}else{
+			checkDate = false;
+		}
+		
+		
+		return checkDate;
+	}
 }

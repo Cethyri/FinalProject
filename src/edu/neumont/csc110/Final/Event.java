@@ -42,6 +42,7 @@ public class Event implements Serializable{
 		this.eventDate = eventDate;
 		this.dateString = dateString;
 	}
+	
 	public void editTitle(){
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}

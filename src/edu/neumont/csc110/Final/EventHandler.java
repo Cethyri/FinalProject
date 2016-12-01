@@ -1,9 +1,7 @@
 package edu.neumont.csc110.Final;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class EventHandler implements Serializable{
@@ -12,14 +10,13 @@ public class EventHandler implements Serializable{
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private int counter;
 	private Event e;
-	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
 	//private ArrayList<Event> event;
 
 	private boolean back, saved;
 
 	public EventHandler() {
-
+		
 	}
 
 	public boolean veiwDay(Date d) {
@@ -61,7 +58,6 @@ public class EventHandler implements Serializable{
 		
 		menu += "What would you like to do?";
 		menu += "\t\t";
-		// menu += "Current calendar: " + name;
 		menu += "\n\n";
 		menu += "\tInput - result\n\n";
 		menu += "\t" + ADD + " - add a new events\n";
@@ -117,6 +113,18 @@ public class EventHandler implements Serializable{
 		events.add(e);
 	}
 
+	public void editEvent(String title, Date d) {
+		boolean changed = false;
+		for( int i = 0; i < events.size(); i++) {
+			Event e = events.get(i);
+			if(e.getEventTitle().equals(Methods.getLastInput())) {
+				e.editAll();
+				e.displayAll();
+				changed = true;
+			}
+		}
+	}
+		
 	public void removeEvent(String title, Date d) {
 		for ( int i = 0;  i < events.size(); i++){
 			Event e = events.get(i);
@@ -128,12 +136,17 @@ public class EventHandler implements Serializable{
 		}
 	}
 	
-	public void editEvent(String title, Date d) {
-		
-	}
 
 	public int getEventAmount(Date d) {
-		return getEventsOn(d).size();
+		// return getEventsOn(d).size();
+		for (int i = 0; i < events.size(); i++) {
+			Event e = events.get(i);
+			if (e.getDate().equals(Methods.getLastDateString())) {
+				counter++;
+			}
+		}
+		return counter + getEventsOn(d).size();
+
 	}
 
 	public String getPriorities(Date d) {

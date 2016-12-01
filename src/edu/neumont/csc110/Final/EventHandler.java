@@ -2,12 +2,12 @@ package edu.neumont.csc110.Final;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class EventHandler{
 	private Event e;
-	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	private int counter;
+	//private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	public EventHandler(){
@@ -15,8 +15,6 @@ public class EventHandler{
 	}
 
 	public void veiwDay(Date start) {
-		Date currentTime = new Date();
-		System.out.println(formatter.format(currentTime));
 	}
 	
 	public void addEvent() {
@@ -28,10 +26,10 @@ public class EventHandler{
 	}
 
 	public void removeEvent() {
-		for ( int i = 0;  i < events.size(); i++){
+		// remove events based on the event title after user inputs title
+		for ( int i = 0;  i < events.size(); i++) {
 			Event e = events.get(i);
-			if(e.getEventTitle().equals(Methods.getLastInput()))
-			{
+			if(e.getEventTitle().equals(Methods.getLastInput())) {
 				events.remove(i);
 				i--;
 			}
@@ -40,7 +38,15 @@ public class EventHandler{
 	
 
 	// getEventAmount
-	//		gets input of date and checks against events to see how many of them there are
+	public void getEventAmount(){
+		for ( int i = 0;  i < events.size(); i++){
+			Event e = events.get(i);
+			if(e.getEventOccurence().equals(e.getEventOccurence().name())) {
+				counter ++;
+				i--;
+			}
+		}
+	}
 	
 	public ArrayList<Event> getEventsOnDay(Date d) {
 		Date temp;

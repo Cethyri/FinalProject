@@ -41,9 +41,6 @@ public class Event {
 	public void editTitle(){
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
-	public void displayTitle(){
-		System.out.println("\nTitle:\n" + eventTitle);
-	}
 	
 	public void editEventDate(){
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
@@ -169,6 +166,10 @@ public class Event {
 	
 	private void displayEventDate(){
 		System.out.println("\nEvent Date:\n" + Methods.getLastDateString());
+	}
+
+	public void displayTitle(){
+		System.out.println("\nTitle:\n" + eventTitle);
 	}
 	
 	private void displayTimes() {

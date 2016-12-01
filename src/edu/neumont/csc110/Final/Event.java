@@ -20,8 +20,9 @@ public class Event {
 	}
 	
 	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
-			int frequency, int significance, EventType occurrence, PriorityType importance,
-			String description, String startAMPM, String endAMPM, String eventTitle, Date eventDate, String dateString){
+			int frequency, int significance, EventType occurrence, 
+			PriorityType importance, String description, String startAMPM, 
+			String endAMPM, String eventTitle, Date eventDate, String dateString){
 		
 		this.significance = significance;
 		this.occurrence = occurrence;
@@ -67,7 +68,7 @@ public class Event {
 
 		do {
 
-			amPM = Methods.getValidInput("What time convention do you want to use? Enter am or pm.");
+			amPM = Methods.getValidInput("Will this be am or pm.");
 			amPM = amPM.toLowerCase();
 			if (amPM.equals("am") || amPM.equals("pm")) {
 				valid = true;

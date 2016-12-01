@@ -236,7 +236,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 	}
 
 	private void createDisplayDay(int veiwType, int i) {
-		setLine(veiwType, i, EVENT_DISP[veiwType] + getEventAmount());
+		setLine(veiwType, i, getEventAmount() != 0 ? EVENT_DISP[veiwType] + getEventAmount(): "");
 		if (veiwType != BI_MONTH_I) {
 			setLine(veiwType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[veiwType]: "");			
 		}
@@ -279,6 +279,9 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		String temp = "LMH", priorities = "";
 		temp = EH.getPriorities(getTime());
 		switch (veiwType) {
+		case BI_MONTH_I:
+			priorities = temp;
+			break;
 		case MONTH_I:
 			for (int i = 0; i < temp.length(); i++) {
 				switch (temp.charAt(i)) {

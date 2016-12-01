@@ -25,11 +25,12 @@ public class EventHandler implements Serializable{
 	public boolean veiwDay(Date d) {
 		back = false;
 
-		String input, action, title = "";
+		String input, action, title;
 		
 		String[] parts;
 
 		do {
+			title = "";
 			input = Methods.getValidInput(interactMenu(d));
 			input = input.toLowerCase();
 
@@ -41,10 +42,11 @@ public class EventHandler implements Serializable{
 				for (int i = 1; i < parts.length; i++) {
 					title += parts[i];					
 				}
-				saved = interactWith(input, title, d);
+				interactWith(input, title, d);
 			} else {
-				saved = interactWith(input, d);
+				interactWith(input, d);
 			}
+			System.out.println(input + " " + title);
 		} while (!back);
 
 		return saved;
@@ -61,7 +63,6 @@ public class EventHandler implements Serializable{
 		
 		menu += "What would you like to do?";
 		menu += "\t\t";
-		// menu += "Current calendar: " + name;
 		menu += "\n\n";
 		menu += "\tInput - result\n\n";
 		menu += "\t" + ADD + " - add a new events\n";
@@ -82,6 +83,7 @@ public class EventHandler implements Serializable{
 			break;
 		case EDIT:
 			editEvent(title, d);
+			System.out.println("hiiii");
 			saved = false;
 			break;
 		default:

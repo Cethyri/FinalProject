@@ -2,15 +2,14 @@ package edu.neumont.csc110.Final;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("deprecation")
 public class EventHandler{
 	private Event e;
-	private EventType eT;
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-	private ArrayList<Event> event = new ArrayList<Event>();
-	Predicate<? super Event> filter;
+	private ArrayList<Event> events = new ArrayList<Event>();
+	//private ArrayList<Event> event;
 	
 	public EventHandler(){
 		
@@ -19,13 +18,14 @@ public class EventHandler{
 	public void veiwDay(Date start) {
 		Date currentTime = new Date();
 		System.out.println(formatter.format(currentTime));
-		//return boolean 
 	}
+	
 	public void addEvent() {
 		e = new Event();
 		e.editAll();
 		e.displayAll();
-		event.add(e);
+		events.add(e);
+		System.out.println(events);
 	}
 
 	public void removeEvent() {
@@ -43,8 +43,19 @@ public class EventHandler{
 	// getEventAmount
 	//		gets input of date and checks against events to see how many of them there are
 	
-	public void interactWithEvents() {
-		
+	public ArrayList<Event> getEventsOnDay(Date d) {
+		Date temp;
+		ArrayList<Event> eventsOnDay = new ArrayList<Event> ();
+		for (Event e : events) {
+			temp = e.getDate();
+			if (temp.getMonth() == d.getMonth() && temp.getDate() == d.getDate() && temp.getYear() == d.getYear()) {
+				eventsOnDay.add(e);
+			}
+//			else if (e.reoccursOn(d)) {
+//				eventsOnDay.add(e);
+//			}
+		}
+		return (ArrayList<Event>) events;
 	}
 	
 	public ArrayList<Event> getEvents() {

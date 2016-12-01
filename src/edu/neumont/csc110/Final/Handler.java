@@ -31,10 +31,11 @@ public class Handler {
 	}
 
 	public void interact() {
-		String input, action, name = "";
+		String input, action, name;
 		String[] parts;
 
 		do {
+			name = "";
 			input = Methods.getValidInput(fileMenu());
 			input = input.toLowerCase();
 			parts = input.split(" ");
@@ -158,6 +159,7 @@ public class Handler {
 
 					ObjectOutputStream save = new ObjectOutputStream(saveFile);
 
+					saved = true;
 					save.writeObject(C);
 					currentName = name;
 

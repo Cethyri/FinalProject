@@ -36,7 +36,7 @@ public class Handler {
 		do {
 			name = "";
 			input = Methods.getValidInput(fileMenu());
-			
+
 			parts = input.split(" ");
 
 			action = parts[0];
@@ -106,9 +106,8 @@ public class Handler {
 			break;
 		case VIEW:
 			if (currentName != null) {
-				saved = C.view(saved);				
-			}
-			else {
+				saved = C.view(saved);
+			} else {
 				Methods.pauseOn("No calendar selected, make a new calendar or load one before viewing", true);
 			}
 			break;
@@ -205,7 +204,7 @@ public class Handler {
 					ObjectOutputStream save = new ObjectOutputStream(saveFile);
 
 					saveBefore("creating a new calendar");
-					
+
 					C = new Calendar(name);
 					save.writeObject(C);
 					currentName = name;
@@ -216,7 +215,7 @@ public class Handler {
 
 				} catch (Exception e) {
 					Methods.pauseOn("That file name is invalid.", true);
-					 error(e);
+					error(e);
 				}
 			}
 		} else {
@@ -240,7 +239,7 @@ public class Handler {
 						Calendar tC = (Calendar) save.readObject();
 
 						save.close();
-						
+
 						saved = false;
 						if (tC != null) {
 							C.Combine(tC);
@@ -332,6 +331,6 @@ public class Handler {
 
 	private void error(Exception exc) {
 		exc.printStackTrace();
-		//Methods.pauseOn("An error occured", true);
+		// Methods.pauseOn("An error occured", true);
 	}
 }

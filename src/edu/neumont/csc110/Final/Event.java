@@ -181,11 +181,11 @@ public class Event implements Serializable{
 		setPriorityLevel();
 	}
 	
-	public void setAll(){
+	public void setAll() {
 		displayEventDate();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event date? Yes or no? \n");
-		if (yesNo){
-			setEventDate();			
+		if (yesNo) {
+			setEventDate();
 		}
 
 		displayTitle();

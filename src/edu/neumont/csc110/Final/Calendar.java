@@ -40,14 +40,14 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		this.name = name;
 
 		display = new ArrayList<String>();
-		
+
 		EH = new EventHandler();
 	}
 
 	public boolean view(boolean saved) {
 		back = false;
 		this.saved = saved;
-		
+
 		String input;
 
 		do {
@@ -91,7 +91,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		}
 
 		Methods.clearScreen();
-		
+
 		switch (action) {
 		case BI_MONTH_S:
 			add(DAY_OF_MONTH, -(get(DAY_OF_MONTH) - 1));
@@ -125,7 +125,9 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		display.add("");
 		display.add(getMonthTitle(BI_MONTH_I));
 		display.add(verticalLine(BI_MONTH_I) + SPACER + verticalLine(BI_MONTH_I));
-		display.add("|Sun.  |Mon.  |Tue.  |Wed.  |Thur. |Fri.  |Sat.  |" + SPACER + "|Sun.  |Mon.  |Tue.  |Wed.  |Thur. |Fri.  |Sat.  |");
+		display.add(
+				"|Sun.  |Mon.  |Tue.  |Wed.  |Thur. |Fri.  |Sat.  |" + SPACER
+						+ "|Sun.  |Mon.  |Tue.  |Wed.  |Thur. |Fri.  |Sat.  |");
 		display.add(verticalLine(BI_MONTH_I) + SPACER + verticalLine(BI_MONTH_I));
 		createDisplay(BI_MONTH_I, display.size());
 
@@ -154,7 +156,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		display();
 		System.out.println();
 	}
-	
+
 	private String getMonthTitle(int viewType) {
 		String monthTitle = "";
 		switch (viewType) {
@@ -176,7 +178,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			int startMonth = get(MONTH);
 			add(DAY_OF_MONTH, 7);
 			if (get(MONTH) != startMonth) {
-				monthTitle += " - " + getDisplayName(MONTH, LONG_STANDALONE, Locale.US) + " " + get(YEAR);				
+				monthTitle += " - " + getDisplayName(MONTH, LONG_STANDALONE, Locale.US) + " " + get(YEAR);
 			}
 			add(DAY_OF_MONTH, -7);
 			break;
@@ -205,13 +207,14 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		if (viewType == BI_MONTH_I) {
 			startDay = get(DAY_OF_WEEK) - 1;
 			startMonth = get(MONTH);
-			for (int i = startRow; i - startRow < (HEIGHT[viewType] + 1) * view_ROWS[viewType]; i += HEIGHT[viewType] + 1) {
+			for (int i = startRow; i - startRow < (HEIGHT[viewType] + 1) * view_ROWS[viewType]; i += HEIGHT[viewType]
+					+ 1) {
 
 				singleRow(viewType, startRow, startDay, startMonth, i);
 				display.set(i + HEIGHT[viewType], display.get(i + HEIGHT[viewType]) + verticalLine(viewType));
 			}
 		}
-		
+
 	}
 
 	private void singleRow(int viewType, int startRow, int startDay, int startMonth, int i) {
@@ -234,9 +237,9 @@ public class Calendar extends GregorianCalendar implements Serializable {
 	}
 
 	private void createDisplayDay(int viewType, int i) {
-		setLine(viewType, i, getEventAmount() != 0 ? EVENT_DISP[viewType] + getEventAmount(): "");
+		setLine(viewType, i, getEventAmount() != 0 ? EVENT_DISP[viewType] + getEventAmount() : "");
 		if (viewType != BI_MONTH_I) {
-			setLine(viewType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[viewType]: "");			
+			setLine(viewType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[viewType] : "");
 		}
 		switch (viewType) {
 		case BI_MONTH_I:
@@ -254,7 +257,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		add(DAY_OF_MONTH, 1);
 		complete();
 	}
-	
+
 	private void setLine(int viewType, int i, String string) {
 		for (int j = string.length(); j < WIDTH[viewType]; j++) {
 			string += " ";
@@ -314,7 +317,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			break;
 		default:
 		}
-		return getEventAmount() != 0 ? priorities: "";
+		return getEventAmount() != 0 ? priorities : "";
 	}
 
 	private String verticalLine(int viewType) {

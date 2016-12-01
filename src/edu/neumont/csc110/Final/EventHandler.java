@@ -2,6 +2,7 @@ package edu.neumont.csc110.Final;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class EventHandler {
@@ -9,6 +10,9 @@ public class EventHandler {
 	private Event e;
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
+	//private ArrayList<Event> event;
+	
+	public EventHandler(){
 	// private ArrayList<Event> event;
 
 	private boolean back, saved;
@@ -21,6 +25,8 @@ public class EventHandler {
 		back = false;
 
 		String input, action, title;
+	
+	public EventHandler(){
 		
 		String[] parts;
 
@@ -111,8 +117,14 @@ public class EventHandler {
 	}
 
 	public void removeEvent(String title, Date d) {
-		events.remove(0);
-		System.out.println("Theres nothing there. " + events);
+		for ( int i = 0;  i < events.size(); i++){
+			Event e = events.get(i);
+			if(e.getEventTitle().equals(Methods.getLastInput()))
+			{
+				events.remove(i);
+				i--;
+			}
+		}
 	}
 	
 	public void editEvent(String title, Date d) {

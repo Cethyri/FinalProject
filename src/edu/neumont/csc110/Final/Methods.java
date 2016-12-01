@@ -159,7 +159,7 @@ public class Methods {
 		return dateFormat;
 	}
 
-	public static String getNewDateString() {
+	public static String getLastDateString() {
 		return newDateString;
 	}
 	

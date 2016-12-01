@@ -24,7 +24,10 @@ public class Handler {
 		currentName = null;
 		quit = false;
 		saved = true;
-
+		File f = new File(FILE_PATH);
+		if (!f.isDirectory()) {
+			f.mkdir();
+		}
 	}
 
 	public void interact() {

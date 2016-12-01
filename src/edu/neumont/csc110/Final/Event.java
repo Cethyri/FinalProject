@@ -1,6 +1,7 @@
 package edu.neumont.csc110.Final;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,9 +17,9 @@ public class Event implements Serializable{
 	private String description, startAMPM, endAMPM, eventTitle, dateString;
 	private boolean valid, yesNo;
 	private Date eventDate;
-	
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-
+	private DecimalFormat timeFormat = new DecimalFormat("##.0");
+	
 	public Event() {
 		
 	}
@@ -45,9 +46,13 @@ public class Event implements Serializable{
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
 	
-	public void editEventDate(){
+	public void editInitialEventDate(){
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
 		dateString = formatter.format(eventDate);
+	}
+	
+	public void editNewEventDate(Date newDate){
+		eventDate = newDate;
 	}
 	
 	private void editStartTime() {
@@ -170,7 +175,7 @@ public class Event implements Serializable{
 	}
 	
 	public void editAll(){
-		editEventDate();
+		editInitialEventDate();
 		editTitle();
 		editStartTime();
 		editEndTime();
@@ -188,8 +193,8 @@ public class Event implements Serializable{
 	}
 	
 	private void displayTimes() {
-		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]" 
-				+ "\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
+		System.out.println("\nEvent Start Time - [" + startHours + ":" + timeFormat.format(startMinutes) + " " + startAMPM + "]" 
+				+ "\nEvent End Time - [" + endHours + ":" + timeFormat.format(endMinutes) + " " + endAMPM + "]");
 	}
 
 	private void displayDescription() {
@@ -203,7 +208,7 @@ public class Event implements Serializable{
 
 	private void displayEventPriority() {
 		System.out.println("\nEvent Priority: ");
-		System.out.println(occurrence.name() + "\n");
+		System.out.println(importance.name() + "\n");
 	}
 	
 	public void displayAll() {
@@ -234,7 +239,7 @@ public class Event implements Serializable{
 	@Override
 	public String toString() {
 		return "\nEvent Date: " + dateString + "\nTitle: " + eventTitle + "\nEvent Start Time - " + startHours + ":"
-				+ startMinutes + " " + startAMPM + "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM
+				+ timeFormat.format(startMinutes) + " " + startAMPM + "\nEvent End Time - " + endHours + ":" + timeFormat.format(endMinutes) + " " + endAMPM
 				+ "\nDescription:\n\t" + description + "\nPriority Level - " + importance.name()
 				+ "\nOccurrence Level - " + occurrence.name() + "\n";
 	}

@@ -1,5 +1,6 @@
 package edu.neumont.csc110.Final;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
@@ -7,9 +8,12 @@ public class Event {
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurrence;
 	private PriorityType importance;
-	private String description, startAMPM, endAMPM, eventTitle;
+	private String description, startAMPM, endAMPM, eventTitle, dateString;
 	private boolean valid, yesNo;
 	private Date eventDate;
+	
+	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	
 	
 	public Event() {
 		
@@ -17,7 +21,7 @@ public class Event {
 	
 	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
 			int frequency, int significance, EventType occurrence, PriorityType importance,
-			String description, String startAMPM, String endAMPM, String eventTitle, Date eventDate){
+			String description, String startAMPM, String endAMPM, String eventTitle, Date eventDate, String dateString){
 		
 		this.significance = significance;
 		this.occurrence = occurrence;
@@ -32,6 +36,7 @@ public class Event {
 		this.description = description;
 		this.eventTitle = eventTitle;
 		this.eventDate = eventDate;
+		this.dateString = dateString;
 	}
 	public void editTitle(){
 		eventTitle = Methods.getValidInput("What is the title for this event?");
@@ -41,7 +46,8 @@ public class Event {
 	}
 	
 	public void editEventDate(){
-		eventDate = Methods.getValidDateInput("What date does this event occur on?");
+		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
+		dateString = formatter.format(eventDate);
 	}
 	
 	private void editStartTime() {
@@ -162,7 +168,7 @@ public class Event {
 	}
 	
 	private void displayEventDate(){
-		System.out.println("\nEvent Date:\n" + Methods.getNewDateString());
+		System.out.println("\nEvent Date:\n" + Methods.getLastDateString());
 	}
 	
 	private void displayTimes() {
@@ -241,11 +247,11 @@ public class Event {
 
 	@Override
 	public String toString(){
-		return "Event Date]" + Methods.getNewDateString() 
-				+ "\nTitle: " + eventTitle
+		return "\nEvent Date: " + dateString + "\nTitle: " + eventTitle
 				+ "\nEvent Start Time - " + startHours + ":" + startMinutes + " " + startAMPM 
 				+ "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM
-				+ "\nDescription:\n\t" + description + "\nPriority Level - " + "[" +importance.name() +"]" 
-				+ "\nOccurrence Level - " + "[" + occurrence.name();
+				+ "\nDescription:\n\t" + description + "\nPriority Level - " + importance.name() 
+				+ "\nOccurrence Level - " + occurrence.name() + "\n";
 	}
+
 }

@@ -3,6 +3,7 @@ package edu.neumont.csc110.Final;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class EventHandler{
 	private Event e;
@@ -28,8 +29,16 @@ public class EventHandler{
 	}
 
 	public void removeEvent() {
-		//event.remove(potato);
+		for ( int i = 0;  i < event.size(); i++){
+			Event e = event.get(i);
+			if(e.getEventTitle().equals(Methods.getLastInput()))
+			{
+				event.remove(i);
+				i--;
+			}
+		}
 	}
+	
 
 	// getEventAmount
 	//		gets input of date and checks against events to see how many of them there are
@@ -39,7 +48,6 @@ public class EventHandler{
 	}
 	
 	public ArrayList<Event> getEvents() {
-		
 		return (ArrayList<Event>) event;
 	}
 	

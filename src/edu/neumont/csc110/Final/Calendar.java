@@ -3,10 +3,11 @@ package edu.neumont.csc110.Final;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 @SuppressWarnings("deprecation")
-public class Calendar extends java.util.GregorianCalendar implements Serializable {
+public class Calendar extends GregorianCalendar implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +44,8 @@ public class Calendar extends java.util.GregorianCalendar implements Serializabl
 	}
 
 	public boolean veiw() {
+		back = false;
+		
 		String input;
 
 		do {
@@ -66,7 +69,7 @@ public class Calendar extends java.util.GregorianCalendar implements Serializabl
 		menu += "\t" + BI_MONTH_S + " - veiw two months\n";
 		menu += "\t" + MONTH_S + " - veiw a month\n";
 		menu += "\t" + WEEK_S + " - veiw a week\n";
-		menu += "\t" + DAY_S + " - veiw a day\n";
+		menu += "\t" + DAY_S + " - veiw and edit a day\n";
 		menu += "\t" + BACK + " - return to the file menu\n";
 		return menu;
 	}
@@ -106,7 +109,7 @@ public class Calendar extends java.util.GregorianCalendar implements Serializabl
 			break;
 		case DAY_S:
 			complete();
-			// EH.veiwDay(getTime());
+			saved = EH.veiwDay(getTime());
 			break;
 		case BACK:
 			back = true;
@@ -268,15 +271,12 @@ public class Calendar extends java.util.GregorianCalendar implements Serializabl
 	}
 
 	private String getEventAmount() {
-		// EH.getEventAmount();
-		// things and stuff need do
-		return "420";
+		return "" + EH.getEventAmount(getTime());
 	}
 
 	private String getPriorities(Date time, int veiwType) {
 		String temp = "LMH", priorities = "";
-		// temp = EH.getPriorities();
-		// fill this with things
+		temp = EH.getPriorities(getTime());
 		switch (veiwType) {
 		case MONTH_I:
 			for (int i = 0; i < temp.length(); i++) {
@@ -337,7 +337,7 @@ public class Calendar extends java.util.GregorianCalendar implements Serializabl
 
 	public void Combine(Calendar C) {
 		for (Event e : C.getDates().getEvents()) {
-			addEvent(e);
+			EH.addEvent(e);
 		}
 	}
 

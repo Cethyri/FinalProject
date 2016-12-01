@@ -24,7 +24,10 @@ public class Handler {
 		currentName = null;
 		quit = false;
 		saved = true;
-
+		File f = new File(FILE_PATH);
+		if (!f.isDirectory()) {
+			f.mkdir();
+		}
 	}
 
 	public void interact() {
@@ -99,7 +102,7 @@ public class Handler {
 			break;
 		case VIEW:
 			if (currentName != null) {
-				C.veiw();				
+				saved = C.veiw();				
 			}
 			else {
 				Methods.pauseOn("No calendar selected, make a new calendar or load one before veiwing", true);

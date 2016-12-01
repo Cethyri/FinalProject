@@ -118,7 +118,7 @@ public class EventHandler implements Serializable {
 	public void editEvent(String title, Date d) {
 		for (Event e : getEventsOn(d)) {
 			if (e.getEventTitle().equals(Methods.getLastInput())) {
-				e.editAll();
+				e.setAll();
 				e.displayAll();
 			}
 		}

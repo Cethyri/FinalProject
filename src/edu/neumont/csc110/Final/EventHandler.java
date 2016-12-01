@@ -11,9 +11,6 @@ public class EventHandler {
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
 	//private ArrayList<Event> event;
-	
-	public EventHandler(){
-	// private ArrayList<Event> event;
 
 	private boolean back, saved;
 
@@ -25,8 +22,6 @@ public class EventHandler {
 		back = false;
 
 		String input, action, title;
-	
-	public EventHandler(){
 		
 		String[] parts;
 

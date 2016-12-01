@@ -46,9 +46,13 @@ public class Event implements Serializable{
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
 	
-	public void editEventDate(){
+	public void editInitialEventDate(){
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
 		dateString = formatter.format(eventDate);
+	}
+	
+	public void editNewEventDate(Date newDate){
+		eventDate = newDate;
 	}
 	
 	private void editStartTime() {
@@ -171,7 +175,7 @@ public class Event implements Serializable{
 	}
 	
 	public void editAll(){
-		editEventDate();
+		editInitialEventDate();
 		editTitle();
 		editStartTime();
 		editEndTime();

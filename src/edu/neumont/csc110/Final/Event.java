@@ -1,12 +1,15 @@
 package edu.neumont.csc110.Final;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import sun.util.calendar.Gregorian;
 
-public class Event {
+public class Event implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurrence;

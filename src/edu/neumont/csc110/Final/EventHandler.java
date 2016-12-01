@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class EventHandler implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private int counter;
 	private Event e;

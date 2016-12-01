@@ -35,7 +35,6 @@ public class Event implements Serializable {
 		this.description = description;
 		this.eventTitle = eventTitle;
 		this.eventDate = eventDate;
-		this.dateString = dateString;
 	}
 
 	public void editTitle() {

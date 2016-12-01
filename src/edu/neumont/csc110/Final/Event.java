@@ -18,7 +18,7 @@ public class Event implements Serializable{
 	private boolean valid, yesNo;
 	private Date eventDate;
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-	private DecimalFormat timeFormat = new DecimalFormat("##.0");
+	private DecimalFormat timeFormat = new DecimalFormat("00");
 	
 	public Event() {
 		
@@ -42,6 +42,7 @@ public class Event implements Serializable{
 		this.eventDate = eventDate;
 		this.dateString = dateString;
 	}
+	
 	public void editTitle(){
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}

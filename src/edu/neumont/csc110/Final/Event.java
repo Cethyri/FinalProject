@@ -21,7 +21,7 @@ public class Event implements Serializable{
 	private DecimalFormat timeFormat = new DecimalFormat("00");
 	
 	public Event(Date d) {
-		editAll(d);
+		setAll(d);
 	}
 	
 	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
@@ -43,28 +43,28 @@ public class Event implements Serializable{
 		this.dateString = dateString;
 	}
 	
-	public void editTitle(){
+	public void setTitle(){
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
 	
-	public void editEventDate(){
+	public void setEventDate(){
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
 		dateString = formatter.format(eventDate);
 	}
 	
-	private void editStartTime() {
+	private void setStartTime() {
 		System.out.println("\n[Start Time]\n");
-		startAMPM = editTimeConventions();
-		startHours = editHours();
-		startMinutes = editMinutes();
+		startAMPM = setTimeNotation();
+		startHours = setHours();
+		startMinutes = setMinutes();
 	}
 
-	private void editEndTime() {
+	private void setEndTime() {
 		System.out.println("\n[End Time]\n");
 		do {
-			endAMPM = editTimeConventions();
-			endHours = editHours();
-			endMinutes = editMinutes();
+			endAMPM = setTimeNotation();
+			endHours = setHours();
+			endMinutes = setMinutes();
 			if ((startAMPM == endAMPM && startHours > endHours)
 					|| (startAMPM == endAMPM && (startHours == endHours && startMinutes > endMinutes))
 					|| (startAMPM.equals("pm") && endAMPM.equals("am"))) {
@@ -76,7 +76,7 @@ public class Event implements Serializable{
 
 	}
 
-	private String editTimeConventions() {
+	private String setTimeNotation() {
 		String amPM;
 		valid = false;
 
@@ -95,7 +95,7 @@ public class Event implements Serializable{
 		return amPM;
 	}
 
-	private int editHours() {
+	private int setHours() {
 		int hours;
 
 		hours = Methods.getValidInteger("What is the hours portion of the time?", MIN_HOURS, MAX_HOURS);
@@ -103,7 +103,7 @@ public class Event implements Serializable{
 		return hours;
 	}
 
-	private int editMinutes() {
+	private int setMinutes() {
 		int minutes;
 
 		minutes = Methods.getValidInteger("What is the minutes portion of the time?", MIN_MINUTES, MAX_MINUTES);
@@ -111,7 +111,7 @@ public class Event implements Serializable{
 		return minutes;
 	}
 
-	private void editDescription() {
+	private void setDescription() {
 		valid = false;
 
 		do {
@@ -121,7 +121,7 @@ public class Event implements Serializable{
 		} while (!yesNo);
 	}
 
-	private void editEventOccurence() {
+	private void setEventOccurence() {
 		valid = false;
 		int frequency = 0;
 		
@@ -149,7 +149,7 @@ public class Event implements Serializable{
 		}
 	}
 
-	private void editPriorityLevel() {
+	private void setPriorityLevel() {
 		valid = false;
 		int significance = 0;
 		
@@ -171,55 +171,55 @@ public class Event implements Serializable{
 		}
 	}
 	
-	public void editAll(Date leDate){
+	public void setAll(Date leDate){
 		eventDate = leDate;
-		editTitle();
-		editStartTime();
-		editEndTime();
-		editDescription();
-		editEventOccurence();
-		editPriorityLevel();
+		setTitle();
+		setStartTime();
+		setEndTime();
+		setDescription();
+		setEventOccurence();
+		setPriorityLevel();
 	}
 	
-	public void editAll(){
+	public void setAll(){
 		displayEventDate();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event date? Yes or no? \n");
 		if (yesNo){
-			editEventDate();			
+			setEventDate();			
 		}
 
 		displayTitle();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event title? Yes or no? \n");
 		if (yesNo){
-			editTitle();
+			setTitle();
 		}
 		
 		displayTimes();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event start time? Yes or no? \n");
 		if (yesNo){
-			editStartTime();
+			setStartTime();
 		}
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event end time? Yes or no? \n");
 		if (yesNo){
-			editEndTime();
+			setEndTime();
 		}
 		
 		displayDescription();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event description? Yes or no? \n");
 		if (yesNo){
-			editDescription();
+			setDescription();
 		}
 		
 		displayEventType();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event occurence? Yes or no? \n");
 		if (yesNo){
-			editEventOccurence();
+			setEventOccurence();
 		}
 		
 		displayEventPriority();
 		yesNo = Methods.getConfirmation("\nDo you want to edit the event importance? Yes or no? \n");
 		if (yesNo){
-			editPriorityLevel();
+			setPriorityLevel();
 		}		
 	}
 	

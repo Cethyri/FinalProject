@@ -1,12 +1,13 @@
 package edu.neumont.csc110.Final;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
-public class EventHandler {
-	private static final String ADD = "day", REMOVE = "remove", EDIT = "edit", BACK = "back";
+public class EventHandler implements Serializable{
+	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private Event e;
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
@@ -166,16 +167,17 @@ public class EventHandler {
 	public ArrayList<Event> getEventsOn(Date d) {
 		Date temp;
 		ArrayList<Event> eventsOnDay = new ArrayList<Event>();
+		events.trimToSize();
 		for (Event e : events) {
 			temp = e.getDate();
-			if (temp.getMonth() == d.getMonth() && temp.getDate() == d.getDate() && temp.getYear() == d.getYear()) {
+			if (temp.compareTo(d) == 0) {
 				eventsOnDay.add(e);
 			}
 			// else if (e.checkReoccursOn(d)) {
 			// eventsOnDay.add(e);
 			// }
 		}
-		return (ArrayList<Event>) events;
+		return eventsOnDay;
 	}
 
 	public ArrayList<Event> getEvents() {

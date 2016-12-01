@@ -7,20 +7,18 @@ public class Event {
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
 	private EventType occurrence;
 	private PriorityType importance;
-	private String description, startAMPM, endAMPM;
+	private String description, startAMPM, endAMPM, eventTitle;
 	private boolean valid, yesNo;
 	private Date eventDate;
 	
-//	public Event(){
-//		editAll();
-//		displayAll();
-//	}
+	public Event() {
+		
+	}
 	
 	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
 			int frequency, int significance, EventType occurrence, PriorityType importance,
-			String description, String startAMPM, String endAMPM, Date eventDate){
-//		editAll();
-//		displayAll();
+			String description, String startAMPM, String endAMPM, String eventTitle, Date eventDate){
+		
 		this.significance = significance;
 		this.occurrence = occurrence;
 		this.importance = importance;
@@ -32,21 +30,28 @@ public class Event {
 		this.endMinutes = endMinutes;
 		this.frequency = frequency;
 		this.description = description;
+		this.eventTitle = eventTitle;
 		this.eventDate = eventDate;
 	}
-
+	public void editTitle(){
+		eventTitle = Methods.getValidInput("What is the title for this event?");
+	}
+	public void displayTitle(){
+		System.out.println("\nTitle:\n" + eventTitle);
+	}
+	
 	public void editEventDate(){
 		eventDate = Methods.getValidDateInput("What date does this event occur on?");
 	}
 	
-	public void editStartTime() {
+	private void editStartTime() {
 		System.out.println("\n[Start Time]\n");
 		startAMPM = editTimeConventions();
 		startHours = editHours();
 		startMinutes = editMinutes();
 	}
 
-	public void editEndTime() {
+	private void editEndTime() {
 		System.out.println("\n[End Time]\n");
 		endAMPM = editTimeConventions();
 		endHours = editHours();
@@ -88,7 +93,7 @@ public class Event {
 		return minutes;
 	}
 
-	public void editDescription() {
+	private void editDescription() {
 		valid = false;
 
 		do {
@@ -98,7 +103,7 @@ public class Event {
 		} while (!yesNo);
 	}
 
-	public void editEventOccurence() {
+	private void editEventOccurence() {
 		valid = false;
 
 		frequency = Methods.getValidInteger("\nHow often will this event happen? Enter the number corrosponding to "
@@ -125,7 +130,7 @@ public class Event {
 		}
 	}
 
-	public void editPriorityLevel() {
+	private void editPriorityLevel() {
 		valid = false;
 
 		significance = Methods.getValidInteger("\nHow important is this event happen? Enter the number "
@@ -148,6 +153,7 @@ public class Event {
 	
 	public void editAll(){
 		editEventDate();
+		editTitle();
 		editStartTime();
 		editEndTime();
 		editDescription();
@@ -155,22 +161,20 @@ public class Event {
 		editPriorityLevel();
 	}
 	
-	public void displayEventDate(){
-		System.out.println("\nEvent Date:");
-		System.out.println(Methods.getNewDateString());
+	private void displayEventDate(){
+		System.out.println("\nEvent Date:\n" + Methods.getNewDateString());
 	}
 	
-	public void displayTimes() {
-		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]");
-		System.out.println("\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
+	private void displayTimes() {
+		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]" 
+				+ "\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
 	}
 
-	public void displayDescription() {
-		System.out.println("\nDescription:");
-		System.out.println(description);
+	private void displayDescription() {
+		System.out.println("\nDescription:\n" + description);
 	}
 
-	public void displayEventType() {
+	private void displayEventType() {
 		System.out.println("\nEvent Occurrence: ");
 		switch (frequency) {
 		case 1:
@@ -193,7 +197,7 @@ public class Event {
 		}
 	}
 
-	public void displayEventPriority() {
+	private void displayEventPriority() {
 		System.out.println("\nEvent Priority: ");
 		switch (significance) {
 		case 1:
@@ -212,6 +216,7 @@ public class Event {
 	
 	public void displayAll() {
 		displayEventDate();
+		displayTitle();
 		displayTimes();
 		displayDescription();
 		displayEventType();
@@ -230,10 +235,16 @@ public class Event {
 		return eventDate;
 	}
 	
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	@Override
 	public String toString(){
 		return "Event Date]" + Methods.getNewDateString() 
-				+ "\nEvent Start Time - " + startHours + ":" + startMinutes + " " + startAMPM + "" 
-				+ "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM + "" 
+				+ "\nTitle: " + eventTitle
+				+ "\nEvent Start Time - " + startHours + ":" + startMinutes + " " + startAMPM 
+				+ "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM
 				+ "\nDescription:\n\t" + description + "\nPriority Level - " + "[" +importance.name() +"]" 
 				+ "\nOccurrence Level - " + "[" + occurrence.name();
 	}

@@ -6,7 +6,9 @@ public class Driver {
 		EventHandler eH = new EventHandler();
 		
 		eH.addEvent();
-		eH.removeEvent();
+		//eH.addEvent();
+		
+		//eH.removeEvent();
 		
 		Handler H = new Handler();
 		H.interact();

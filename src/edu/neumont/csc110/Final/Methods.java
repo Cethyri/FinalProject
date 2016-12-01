@@ -76,7 +76,6 @@ public class Methods {
 	}
 	
 	public static Date getValidDateInput(String question){
-		Calendar cal = Calendar.getInstance();
 		System.out.println(question);
 		System.out.println("Ex. MM/DD/YYYY, 1/1/1111, 01/01/1111");
 
@@ -154,6 +153,10 @@ public class Methods {
 	
 	public static boolean getAnswer(){
 		return answer;
+	}
+	
+	public static Date getLastDateInput() {
+		return dateFormat;
 	}
 
 	public static String getNewDateString() {

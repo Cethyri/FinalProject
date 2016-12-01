@@ -20,8 +20,8 @@ public class Event implements Serializable{
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private DecimalFormat timeFormat = new DecimalFormat("00");
 	
-	public Event() {
-		
+	public Event(Date d) {
+		editAll(d);
 	}
 	
 	public Event(int startHours, int startMinutes, int endHours, int endMinutes,

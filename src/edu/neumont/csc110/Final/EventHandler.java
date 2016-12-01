@@ -29,16 +29,17 @@ public class EventHandler implements Serializable {
 		do {
 			title = "";
 			input = Methods.getValidInput(interactMenu(d));
-			input = input.toLowerCase();
 
 			parts = input.split(" ");
 
 			action = parts[0];
+			action = action.toLowerCase();
 
 			if (parts.length > 1) {
 				for (int i = 1; i < parts.length; i++) {
-					title += parts[i];
+					title += parts[i] + " ";
 				}
+				title.trim();
 				interactWith(action, title, d);
 			} else {
 				interactWith(action, d);

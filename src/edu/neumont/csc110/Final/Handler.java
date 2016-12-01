@@ -37,15 +37,17 @@ public class Handler {
 		do {
 			name = "";
 			input = Methods.getValidInput(fileMenu());
-			input = input.toLowerCase();
+			
 			parts = input.split(" ");
 
 			action = parts[0];
+			action = action.toLowerCase();
 
 			if (parts.length > 1) {
 				for (int i = 1; i < parts.length; i++) {
-					name += parts[i];
+					name += parts[i] + " ";
 				}
+				name = name.trim();
 				doAction(action, name);
 			} else {
 				doAction(action);

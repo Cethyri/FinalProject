@@ -328,10 +328,6 @@ public class Handler {
 		}
 	}
 
-	private void unimplemented() {
-		Methods.pauseOn("UNINPLEMENTED", true);
-	}
-
 	private void error(Exception exc) {
 		exc.printStackTrace();
 		//Methods.pauseOn("An error occured", true);

@@ -103,6 +103,7 @@ public class Methods {
 		question += " (yes or no)";
 		System.out.println(question);
 		boolean valid = false;
+		answer = false;
 		
 		do {
 			String confirmation = in.nextLine();

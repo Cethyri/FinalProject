@@ -2,6 +2,9 @@ package edu.neumont.csc110.Final;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import sun.util.calendar.Gregorian;
 
 public class Event {
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
@@ -13,8 +16,7 @@ public class Event {
 	private Date eventDate;
 
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-	
-	
+
 	public Event() {
 
 	}
@@ -62,12 +64,13 @@ public class Event {
 		do {
 			endAMPM = editTimeConventions();
 			endHours = editHours();
-			endMinutes = editMinutes();				
+			endMinutes = editMinutes();
 			if ((startAMPM == endAMPM && startHours > endHours)
-				|| (startAMPM == endAMPM && (startHours == endHours && startMinutes > endMinutes))
-				|| (startAMPM.equals("pm") && endAMPM.equals("am"))){
+					|| (startAMPM == endAMPM && (startHours == endHours && startMinutes > endMinutes))
+					|| (startAMPM.equals("pm") && endAMPM.equals("am"))) {
 				valid = false;
-				System.out.println("You entered a time that would make the event end before it starts. Please try again.");
+				System.out.println(
+						"You entered a time that would make the event end before it starts. Please try again.");
 			}
 		} while (!valid);
 
@@ -228,23 +231,62 @@ public class Event {
 	}
 
 	@Override
-	public String toString(){
-		return "\nEvent Date: " + dateString + "\nTitle: " + eventTitle
-				+ "\nEvent Start Time - " + startHours + ":" + startMinutes + " " + startAMPM 
-				+ "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM
-				+ "\nDescription:\n\t" + description + "\nPriority Level - " + importance.name() 
+	public String toString() {
+		return "\nEvent Date: " + dateString + "\nTitle: " + eventTitle + "\nEvent Start Time - " + startHours + ":"
+				+ startMinutes + " " + startAMPM + "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM
+				+ "\nDescription:\n\t" + description + "\nPriority Level - " + importance.name()
 				+ "\nOccurrence Level - " + occurrence.name() + "\n";
 	}
-	
+
 	public boolean checkReoccursOn(Date recursiveDate) {
-		boolean checkDate;
-		if (occurrence == EventType.MONTHLY && (eventDate == recursiveDate)){
+		boolean checkDate = false;
+		GregorianCalendar gcLocal = new GregorianCalendar();
+		GregorianCalendar gcCheck = new GregorianCalendar();
+
+		gcLocal.setTime(eventDate);
+		gcCheck.setTime(recursiveDate);
+
+		if (occurrence.equals(EventType.DAILY)) {
+			
 			checkDate = true;
-		}else{
+		
+		} else if (occurrence.equals(EventType.WEEKLY)
+				&& (gcLocal.get(GregorianCalendar.DAY_OF_WEEK) == gcCheck.get(GregorianCalendar.DAY_OF_WEEK))) {
+			
+			checkDate = true;
+			
+		} else if (occurrence.equals(EventType.MONTHLY)) {
+			
+			if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)) {
+				checkDate = true;
+			} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+					&& gcCheck.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck
+							.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
+				checkDate = true;
+			} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) < gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+					&& gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcLocal
+							.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
+				checkDate = true;			
+			}
+			
+		} else if (occurrence.equals(EventType.YEARLY)) {
+			
+			if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+					&& gcLocal.get(GregorianCalendar.MONTH) == gcCheck.get(GregorianCalendar.MONTH)) {
+				checkDate = true;
+			} else if (gcLocal.isLeapYear(gcLocal.get(GregorianCalendar.YEAR))
+					&& gcLocal.get(GregorianCalendar.MONTH) == GregorianCalendar.FEBRUARY) {
+				if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+						&& gcCheck.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck
+								.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
+					checkDate = true;
+				}
+			}
+			
+		} else {
 			checkDate = false;
 		}
-		
-		
+
 		return checkDate;
 	}
 }

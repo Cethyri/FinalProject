@@ -193,8 +193,8 @@ public class Event implements Serializable{
 	}
 	
 	private void displayTimes() {
-		System.out.println("\nEvent Start Time - [" + startHours + ":" + startMinutes + " " + startAMPM + "]" 
-				+ "\nEvent End Time - [" + endHours + ":" + endMinutes + " " + endAMPM + "]");
+		System.out.println("\nEvent Start Time - [" + startHours + ":" + timeFormat.format(startMinutes) + " " + startAMPM + "]" 
+				+ "\nEvent End Time - [" + endHours + ":" + timeFormat.format(endMinutes) + " " + endAMPM + "]");
 	}
 
 	private void displayDescription() {

@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import sun.util.calendar.Gregorian;
-
 public class Event implements Serializable{
 
 	private static final long serialVersionUID = 1L;

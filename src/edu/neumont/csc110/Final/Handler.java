@@ -31,7 +31,7 @@ public class Handler {
 	}
 
 	public void interact() {
-		String input, action, name;
+		String input, action, name = "";
 		String[] parts;
 
 		do {
@@ -42,7 +42,9 @@ public class Handler {
 			action = parts[0];
 
 			if (parts.length > 1) {
-				name = parts[1];
+				for (int i = 1; i < parts.length; i++) {
+					name += parts[i];
+				}
 				doAction(action, name);
 			} else {
 				doAction(action);

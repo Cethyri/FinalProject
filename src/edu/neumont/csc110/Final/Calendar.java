@@ -15,7 +15,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 
 	private static final int BI_MONTH_I = 0, MONTH_I = 1, WEEK_I = 2;
 
-	private static final int[] WIDTH = { 6, 9, 11 }, HEIGHT = { 2, 3, 4 }, VEIW_ROWS = { 6, 6, 1 };
+	private static final int[] WIDTH = { 6, 9, 11 }, HEIGHT = { 2, 3, 4 }, view_ROWS = { 6, 6, 1 };
 
 	private static final char LOW = 'L', MEDIUM = 'M', HIGH = 'H';
 
@@ -45,37 +45,37 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		EH = new EventHandler();
 	}
 
-	public boolean veiw() {
+	public boolean view() {
 		back = false;
 		
 		String input;
 
 		do {
-			input = Methods.getValidInput(veiwMenu());
+			input = Methods.getValidInput(viewMenu());
 			input = input.toLowerCase();
 
-			saved = veiwAction(input);
+			saved = viewAction(input);
 
 		} while (!back);
 
 		return saved;
 	}
 
-	private String veiwMenu() {
+	private String viewMenu() {
 		String menu = "";
 		menu += "What would you like to do?";
 		menu += "\t\t";
 		menu += "\n\n";
 		menu += "\tInput - result\n\n";
-		menu += "\t" + BI_MONTH_S + " - veiw two months\n";
-		menu += "\t" + MONTH_S + " - veiw a month\n";
-		menu += "\t" + WEEK_S + " - veiw a week\n";
-		menu += "\t" + DAY_S + " - veiw and edit a day\n";
+		menu += "\t" + BI_MONTH_S + " - view two months\n";
+		menu += "\t" + MONTH_S + " - view a month\n";
+		menu += "\t" + WEEK_S + " - view a week\n";
+		menu += "\t" + DAY_S + " - view and edit a day\n";
 		menu += "\t" + BACK + " - return to the file menu\n";
 		return menu;
 	}
 
-	private boolean veiwAction(String action) {
+	private boolean viewAction(String action) {
 		Date start;
 		switch (action) {
 		case BI_MONTH_S:
@@ -84,7 +84,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			display.clear();
 		case DAY_S:
 			start = Methods.getValidDateInput(
-					"When would you like the veiw to start?\nDates will be shifted backwards to fit the veiw.\nEx: 11/12/2016 will be shifted to 11/01/2016 for veiwing a month.");
+					"When would you like the view to start?\nDates will be shifted backwards to fit the view.\nEx: 11/12/2016 will be shifted to 11/01/2016 for viewing a month.");
 			setTime(start);
 		default:
 			// nothin'
@@ -96,21 +96,21 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		case BI_MONTH_S:
 			add(DAY_OF_MONTH, -(get(DAY_OF_MONTH) - 1));
 			complete();
-			veiwBiMonth();
+			viewBiMonth();
 			break;
 		case MONTH_S:
 			add(DAY_OF_MONTH, -(get(DAY_OF_MONTH) - 1));
 			complete();
-			veiwMonth();
+			viewMonth();
 			break;
 		case WEEK_S:
 			add(DAY_OF_WEEK, -(get(DAY_OF_WEEK) - 1));
 			complete();
-			veiwWeek();
+			viewWeek();
 			break;
 		case DAY_S:
 			complete();
-			saved = EH.veiwDay(getTime());
+			saved = EH.viewDay(getTime());
 			break;
 		case BACK:
 			back = true;
@@ -122,7 +122,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		return saved;
 	}
 
-	private void veiwBiMonth() {
+	private void viewBiMonth() {
 		display.add("Calendar " + name);
 		display.add("");
 		display.add(getMonthTitle(BI_MONTH_I));
@@ -135,7 +135,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		System.out.println();
 	}
 
-	private void veiwMonth() {
+	private void viewMonth() {
 		display.add("Calendar " + name + " - " + getMonthTitle(MONTH_I));
 		display.add(" --Sun.--- --Mon.--- --Tue.--- --Wed.--- --Thur.-- --Fri.--- --Sat.---");
 		createDisplay(MONTH_I, display.size());
@@ -144,7 +144,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		System.out.println();
 	}
 
-	private void veiwWeek() {
+	private void viewWeek() {
 		display.add("Calendar " + name);
 		display.add("");
 		display.add(getMonthTitle(WEEK_I));
@@ -157,12 +157,12 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		System.out.println();
 	}
 	
-	private String getMonthTitle(int veiwType) {
+	private String getMonthTitle(int viewType) {
 		String monthTitle = "";
-		switch (veiwType) {
+		switch (viewType) {
 		case BI_MONTH_I:
 			monthTitle = getDisplayName(MONTH, LONG_STANDALONE, Locale.US) + " " + get(YEAR);
-			for (int i = monthTitle.length(); monthTitle.length() < (WIDTH[veiwType] + 1) * DAYS_IN_A_WEEK + 1; i++) {
+			for (int i = monthTitle.length(); monthTitle.length() < (WIDTH[viewType] + 1) * DAYS_IN_A_WEEK + 1; i++) {
 				monthTitle += " ";
 			}
 			monthTitle += SPACER;
@@ -193,63 +193,63 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		}
 	}
 
-	private void createDisplay(int veiwType, int startRow) {
+	private void createDisplay(int viewType, int startRow) {
 		int startDay = get(DAY_OF_WEEK) - 1;
 		int startMonth = get(MONTH);
-		for (int i = startRow; i - startRow < (HEIGHT[veiwType] + 1) * VEIW_ROWS[veiwType]; i += HEIGHT[veiwType] + 1) {
-			for (int j = 0; j < HEIGHT[veiwType]; j++) {
+		for (int i = startRow; i - startRow < (HEIGHT[viewType] + 1) * view_ROWS[viewType]; i += HEIGHT[viewType] + 1) {
+			for (int j = 0; j < HEIGHT[viewType]; j++) {
 				display.add("");
 			}
 
-			singleRow(veiwType, startRow, startDay, startMonth, i);
-			display.add(verticalLine(veiwType) + SPACER);
+			singleRow(viewType, startRow, startDay, startMonth, i);
+			display.add(verticalLine(viewType) + SPACER);
 		}
-		if (veiwType == BI_MONTH_I) {
+		if (viewType == BI_MONTH_I) {
 			startDay = get(DAY_OF_WEEK) - 1;
 			startMonth = get(MONTH);
-			for (int i = startRow; i - startRow < (HEIGHT[veiwType] + 1) * VEIW_ROWS[veiwType]; i += HEIGHT[veiwType] + 1) {
+			for (int i = startRow; i - startRow < (HEIGHT[viewType] + 1) * view_ROWS[viewType]; i += HEIGHT[viewType] + 1) {
 
-				singleRow(veiwType, startRow, startDay, startMonth, i);
-				display.set(i + HEIGHT[veiwType], display.get(i + HEIGHT[veiwType]) + verticalLine(veiwType));
+				singleRow(viewType, startRow, startDay, startMonth, i);
+				display.set(i + HEIGHT[viewType], display.get(i + HEIGHT[viewType]) + verticalLine(viewType));
 			}
 		}
 		
 	}
 
-	private void singleRow(int veiwType, int startRow, int startDay, int startMonth, int i) {
+	private void singleRow(int viewType, int startRow, int startDay, int startMonth, int i) {
 		for (int j = 0; j < DAYS_IN_A_WEEK; j++) {
-			if (j < startDay && i == startRow || (get(MONTH) != startMonth && veiwType != WEEK_I)) {
-				blankDay(veiwType, i);
+			if (j < startDay && i == startRow || (get(MONTH) != startMonth && viewType != WEEK_I)) {
+				blankDay(viewType, i);
 			} else {
-				createDisplayDay(veiwType, i);
+				createDisplayDay(viewType, i);
 			}
 		}
-		for (int k = 0; k < HEIGHT[veiwType]; k++) {
+		for (int k = 0; k < HEIGHT[viewType]; k++) {
 			display.set(i + k, display.get(i + k) + "|" + SPACER);
 		}
 	}
 
-	private void blankDay(int veiwType, int i) {
-		for (int k = 0; k < HEIGHT[veiwType]; k++) {
-			setLine(veiwType, i + k, "");
+	private void blankDay(int viewType, int i) {
+		for (int k = 0; k < HEIGHT[viewType]; k++) {
+			setLine(viewType, i + k, "");
 		}
 	}
 
-	private void createDisplayDay(int veiwType, int i) {
-		setLine(veiwType, i, getEventAmount() != 0 ? EVENT_DISP[veiwType] + getEventAmount(): "");
-		if (veiwType != BI_MONTH_I) {
-			setLine(veiwType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[veiwType]: "");			
+	private void createDisplayDay(int viewType, int i) {
+		setLine(viewType, i, getEventAmount() != 0 ? EVENT_DISP[viewType] + getEventAmount(): "");
+		if (viewType != BI_MONTH_I) {
+			setLine(viewType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[viewType]: "");			
 		}
-		switch (veiwType) {
+		switch (viewType) {
 		case BI_MONTH_I:
-			setLine(veiwType, i + 1, dayNumber(veiwType, getPriorities(getTime(), veiwType)));
+			setLine(viewType, i + 1, dayNumber(viewType, getPriorities(getTime(), viewType)));
 			break;
 		case MONTH_I:
-			setLine(veiwType, i + 2, dayNumber(veiwType, getPriorities(getTime(), veiwType)));
+			setLine(viewType, i + 2, dayNumber(viewType, getPriorities(getTime(), viewType)));
 			break;
 		case WEEK_I:
-			setLine(veiwType, i + 2, getPriorities(getTime(), veiwType));
-			setLine(veiwType, i + 3, dayNumber(veiwType, ""));
+			setLine(viewType, i + 2, getPriorities(getTime(), viewType));
+			setLine(viewType, i + 3, dayNumber(viewType, ""));
 			break;
 		default:
 		}
@@ -257,15 +257,15 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		complete();
 	}
 	
-	private void setLine(int veiwType, int i, String string) {
-		for (int j = string.length(); string.length() < WIDTH[veiwType]; j++) {
+	private void setLine(int viewType, int i, String string) {
+		for (int j = string.length(); string.length() < WIDTH[viewType]; j++) {
 			string += " ";
 		}
 		display.set(i, display.get(i) + "|" + string);
 	}
 
-	private String dayNumber(int veiwType, String string) {
-		for (int i = string.length(); i < WIDTH[veiwType] - 2; i++) {
+	private String dayNumber(int viewType, String string) {
+		for (int i = string.length(); i < WIDTH[viewType] - 2; i++) {
 			string += " ";
 		}
 		return string + get(DAY_OF_MONTH);
@@ -275,10 +275,10 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		return EH.getEventAmount(getTime());
 	}
 
-	private String getPriorities(Date time, int veiwType) {
+	private String getPriorities(Date time, int viewType) {
 		String temp = "LMH", priorities = "";
 		temp = EH.getPriorities(getTime());
-		switch (veiwType) {
+		switch (viewType) {
 		case BI_MONTH_I:
 			priorities = temp;
 			break;
@@ -319,10 +319,10 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		return getEventAmount() != 0 ? priorities: "";
 	}
 
-	private String verticalLine(int veiwType) {
+	private String verticalLine(int viewType) {
 		String line = " ";
 		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < WIDTH[veiwType]; j++) {
+			for (int j = 0; j < WIDTH[viewType]; j++) {
 				line += "-";
 			}
 			line += " ";

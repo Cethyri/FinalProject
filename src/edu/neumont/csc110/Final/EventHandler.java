@@ -19,7 +19,7 @@ public class EventHandler implements Serializable {
 
 	}
 
-	public boolean veiwDay(Date d) {
+	public boolean viewDay(Date d) {
 		back = false;
 
 		String input, action, title;
@@ -39,11 +39,10 @@ public class EventHandler implements Serializable {
 				for (int i = 1; i < parts.length; i++) {
 					title += parts[i];
 				}
-				interactWith(input, title, d);
+				interactWith(action, title, d);
 			} else {
-				interactWith(input, d);
+				interactWith(action, d);
 			}
-			System.out.println(input + " " + title);
 		} while (!back);
 
 		return saved;
@@ -110,8 +109,7 @@ public class EventHandler implements Serializable {
 	}
 
 	public void addEvent(Date d) {
-		e = new Event();
-		e.editAll();
+		e = new Event(d);
 		e.displayAll();
 		events.add(e);
 	}

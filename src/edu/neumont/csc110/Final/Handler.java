@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Handler {
 
 	private static final String LOAD = "load", SAVE = "save", NEW = "new", ADD = "add", DELETE = "delete",
-			LIST = "list", VIEW = "veiw", QUIT = "quit", NAME = "(calendar name)", FILE_PATH = "saveFiles/";
+			LIST = "list", VIEW = "view", QUIT = "quit", NAME = "(calendar name)", FILE_PATH = "saveFiles/";
 
 	private static final String FILE_PROB = "That file doesn't exist. Try checking the files with \"list\".";
 
@@ -105,10 +105,10 @@ public class Handler {
 			break;
 		case VIEW:
 			if (currentName != null) {
-				saved = C.veiw();				
+				saved = C.view();				
 			}
 			else {
-				Methods.pauseOn("No calendar selected, make a new calendar or load one before veiwing", true);
+				Methods.pauseOn("No calendar selected, make a new calendar or load one before viewing", true);
 			}
 			break;
 		case QUIT:

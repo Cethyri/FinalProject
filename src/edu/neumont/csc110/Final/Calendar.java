@@ -41,6 +41,8 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		this.name = name;
 
 		display = new ArrayList<String>();
+		
+		EH = new EventHandler();
 	}
 
 	public boolean veiw() {
@@ -63,7 +65,6 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		String menu = "";
 		menu += "What would you like to do?";
 		menu += "\t\t";
-		//menu += "Current calendar: " + name;
 		menu += "\n\n";
 		menu += "\tInput - result\n\n";
 		menu += "\t" + BI_MONTH_S + " - veiw two months\n";
@@ -237,7 +238,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 	private void createDisplayDay(int veiwType, int i) {
 		setLine(veiwType, i, EVENT_DISP[veiwType] + getEventAmount());
 		if (veiwType != BI_MONTH_I) {
-			setLine(veiwType, i + 1, PRIORITY_DISP[veiwType]);			
+			setLine(veiwType, i + 1, getEventAmount() != 0 ? PRIORITY_DISP[veiwType]: "");			
 		}
 		switch (veiwType) {
 		case BI_MONTH_I:
@@ -270,8 +271,8 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		return string + get(DAY_OF_MONTH);
 	}
 
-	private String getEventAmount() {
-		return "" + EH.getEventAmount(getTime());
+	private int getEventAmount() {
+		return EH.getEventAmount(getTime());
 	}
 
 	private String getPriorities(Date time, int veiwType) {
@@ -312,7 +313,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			break;
 		default:
 		}
-		return priorities;
+		return getEventAmount() != 0 ? priorities: "";
 	}
 
 	private String verticalLine(int veiwType) {

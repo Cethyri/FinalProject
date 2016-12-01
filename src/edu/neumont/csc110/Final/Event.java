@@ -5,14 +5,34 @@ import java.util.Date;
 public class Event {
 	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0;
 	private int startHours, startMinutes, endHours, endMinutes, frequency, significance;
-	private EventType occurence;
+	private EventType occurrence;
 	private PriorityType importance;
 	private String description, startAMPM, endAMPM;
 	private boolean valid, yesNo;
 	private Date eventDate;
-
-	public Event(){
-		
+	
+//	public Event(){
+//		editAll();
+//		displayAll();
+//	}
+	
+	public Event(int startHours, int startMinutes, int endHours, int endMinutes,
+			int frequency, int significance, EventType occurrence, PriorityType importance,
+			String description, String startAMPM, String endAMPM, Date eventDate){
+//		editAll();
+//		displayAll();
+		this.significance = significance;
+		this.occurrence = occurrence;
+		this.importance = importance;
+		this.startAMPM = startAMPM;
+		this.endAMPM = endAMPM;
+		this.startHours = startHours;
+		this.startMinutes = startMinutes;
+		this.endHours = endHours;
+		this.endMinutes = endMinutes;
+		this.frequency = frequency;
+		this.description = description;
+		this.eventDate = eventDate;
 	}
 
 	public void editEventDate(){
@@ -43,7 +63,8 @@ public class Event {
 			amPM = amPM.toLowerCase();
 			if (amPM.equals("am") || amPM.equals("pm")) {
 				valid = true;
-			} else {
+			} 
+			else {
 				System.out.println("Invalid input. Please try again.");
 			}
 		} while (!valid);
@@ -85,19 +106,19 @@ public class Event {
 
 		switch (frequency) {
 		case 1:
-			occurence = EventType.Once;
+			occurrence = EventType.ONCE;
 			break;
 		case 2:
-			occurence = EventType.Daily;
+			occurrence = EventType.DAILY;
 			break;
 		case 3:
-			occurence = EventType.Weekly;
+			occurrence = EventType.WEEKLY;
 			break;
 		case 4:
-			occurence = EventType.Monthly;
+			occurrence = EventType.MONTHLY;
 			break;
 		case 5:
-			occurence = EventType.Yearly;
+			occurrence = EventType.YEARLY;
 			break;
 		default:
 			Methods.pauseOn("Something went wrong - SetEventOccurence()", true);
@@ -112,13 +133,13 @@ public class Event {
 
 		switch (significance) {
 		case 1:
-			importance = PriorityType.LowImportance;
+			importance = PriorityType.LOW;
 			break;
 		case 2:
-			importance = PriorityType.MediumImportance;
+			importance = PriorityType.MEDIUM;
 			break;
 		case 3:
-			importance = PriorityType.HighImportance;
+			importance = PriorityType.HIGH;
 			break;
 		default:
 			Methods.pauseOn("Something went wrong - SetPriorityLevel()", true);
@@ -176,13 +197,13 @@ public class Event {
 		System.out.println("\nEvent Priority: ");
 		switch (significance) {
 		case 1:
-			System.out.println("Low");
+			System.out.println("Low\n");
 			break;
 		case 2:
-			System.out.println("Medium");
+			System.out.println("Medium\n");
 			break;
 		case 3:
-			System.out.println("High");
+			System.out.println("High\n");
 			break;
 		default:
 			Methods.pauseOn("Something went wrong - DisplayEventPriority()", true);
@@ -198,7 +219,7 @@ public class Event {
 	}
 	
 	public EventType getEventOccurence(){
-		return occurence;
+		return occurrence;
 	}
 	
 	public PriorityType getEventPriority(){
@@ -207,5 +228,13 @@ public class Event {
 	
 	public Date getDate(){
 		return eventDate;
+	}
+	
+	public String toString(){
+		return "Event Date]" + Methods.getNewDateString() 
+				+ "\nEvent Start Time - " + startHours + ":" + startMinutes + " " + startAMPM + "" 
+				+ "\nEvent End Time - " + endHours + ":" + endMinutes + " " + endAMPM + "" 
+				+ "\nDescription:\n\t" + description + "\nPriority Level - " + "[" +importance.name() +"]" 
+				+ "\nOccurrence Level - " + "[" + occurrence.name();
 	}
 }

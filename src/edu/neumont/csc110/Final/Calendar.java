@@ -70,7 +70,7 @@ public class Calendar extends java.util.Calendar implements Serializable {
 		case DAY:
 			start = Methods.getValidDateInput("When would you like the veiw to start");
 		default:
-			//nothin'
+			//Nothing'
 		}
 
 		switch (action) {

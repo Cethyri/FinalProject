@@ -180,14 +180,12 @@ public class EventHandler implements Serializable{
 		events.trimToSize();
 		for (Event e : events) {
 			temp = e.getDate();
-			if (temp.getMonth() == d.getMonth() && temp.getDate() == d.getDate() && temp.getYear() == d.getYear()) {
-			if (temp.getMonth() == d.getMonth() && temp.getDate() == d.getDate() && temp.getYear() == d.getYear()) {
 			if (temp.compareTo(d) == 0) {
 				eventsOnDay.add(e);
 			}
-			// else if (e.checkReoccursOn(d)) {
-			// eventsOnDay.add(e);
-			// }
+			else if (e.checkReoccursOn(d)) {
+				eventsOnDay.add(e);
+			}
 		}
 		return eventsOnDay;
 	}

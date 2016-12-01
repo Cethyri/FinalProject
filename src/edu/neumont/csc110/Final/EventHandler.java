@@ -25,10 +25,6 @@ public class EventHandler{
 
 	public void removeEvent() {
 	}
-
-	public void interactWithEvents() {
-
-	}
 	
 	public ArrayList<Event> getEvents() {
 		return event;

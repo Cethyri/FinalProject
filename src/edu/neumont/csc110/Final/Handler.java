@@ -99,7 +99,7 @@ public class Handler {
 			break;
 		case VIEW:
 			if (currentName != null) {
-				C.veiw();				
+				saved = C.veiw();				
 			}
 			else {
 				Methods.pauseOn("No calendar selected, make a new calendar or load one before veiwing", true);

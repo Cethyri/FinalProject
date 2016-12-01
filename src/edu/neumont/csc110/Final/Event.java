@@ -47,13 +47,9 @@ public class Event implements Serializable{
 		eventTitle = Methods.getValidInput("What is the title for this event?");
 	}
 	
-	public void editInitialEventDate(){
+	public void editEventDate(){
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
 		dateString = formatter.format(eventDate);
-	}
-	
-	public void editNewEventDate(Date newDate){
-		eventDate = newDate;
 	}
 	
 	private void editStartTime() {
@@ -175,14 +171,56 @@ public class Event implements Serializable{
 		}
 	}
 	
-	public void editAll(){
-		editInitialEventDate();
+	public void editAll(Date leDate){
+		eventDate = leDate;
 		editTitle();
 		editStartTime();
 		editEndTime();
 		editDescription();
 		editEventOccurence();
 		editPriorityLevel();
+	}
+	
+	public void editAll(){
+		displayEventDate();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event date? Yes or no? \n");
+		if (yesNo){
+			editEventDate();			
+		}
+
+		displayTitle();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event title? Yes or no? \n");
+		if (yesNo){
+			editTitle();
+		}
+		
+		displayTimes();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event start time? Yes or no? \n");
+		if (yesNo){
+			editStartTime();
+		}
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event end time? Yes or no? \n");
+		if (yesNo){
+			editEndTime();
+		}
+		
+		displayDescription();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event description? Yes or no? \n");
+		if (yesNo){
+			editDescription();
+		}
+		
+		displayEventType();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event occurence? Yes or no? \n");
+		if (yesNo){
+			editEventOccurence();
+		}
+		
+		displayEventPriority();
+		yesNo = Methods.getConfirmation("\nDo you want to edit the event importance? Yes or no? \n");
+		if (yesNo){
+			editPriorityLevel();
+		}		
 	}
 	
 	private void displayEventDate(){

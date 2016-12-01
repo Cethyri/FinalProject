@@ -1,9 +1,9 @@
 package edu.neumont.csc110.Final;
 
 public enum EventType {
-	Once,
-	Daily,
-	Weekly,
-	Monthly,
-	Yearly;
+	ONCE,
+	DAILY,
+	WEEKLY,
+	MONTHLY,
+	YEARLY;
 }

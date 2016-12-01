@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.*;
 
 @SuppressWarnings("deprecation")
-public class EventHandler implements Serializable{
+public class EventHandler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private int counter;
 	private Event e;
 	private ArrayList<Event> events = new ArrayList<Event>();
-	//private ArrayList<Event> event;
+	// private ArrayList<Event> event;
 
 	private boolean back, saved;
 
 	public EventHandler() {
-		
+
 	}
 
 	public boolean veiwDay(Date d) {
 		back = false;
 
 		String input, action, title;
-		
+
 		String[] parts;
 
 		do {
@@ -37,7 +37,7 @@ public class EventHandler implements Serializable{
 
 			if (parts.length > 1) {
 				for (int i = 1; i < parts.length; i++) {
-					title += parts[i];					
+					title += parts[i];
 				}
 				interactWith(input, title, d);
 			} else {
@@ -51,13 +51,13 @@ public class EventHandler implements Serializable{
 
 	private String interactMenu(Date d) {
 		String menu = "";
-		
+
 		ArrayList<Event> eventsOn = getEventsOn(d);
 		for (Event e : eventsOn) {
 			System.out.println(e);
 			System.out.println();
 		}
-		
+
 		menu += "What would you like to do?";
 		menu += "\t\t";
 		menu += "\n\n";
@@ -89,7 +89,7 @@ public class EventHandler implements Serializable{
 
 		return saved;
 	}
-	
+
 	private boolean interactWith(String action, Date d) {
 
 		Methods.clearScreen();
@@ -108,7 +108,7 @@ public class EventHandler implements Serializable{
 
 		return saved;
 	}
-	
+
 	public void addEvent(Date d) {
 		e = new Event();
 		e.editAll();
@@ -117,39 +117,26 @@ public class EventHandler implements Serializable{
 	}
 
 	public void editEvent(String title, Date d) {
-		boolean changed = false;
-		for( int i = 0; i < events.size(); i++) {
-			Event e = events.get(i);
-			if(e.getEventTitle().equals(Methods.getLastInput())) {
+		for (Event e : getEventsOn(d)) {
+			if (e.getEventTitle().equals(Methods.getLastInput())) {
 				e.editAll();
 				e.displayAll();
-				changed = true;
 			}
 		}
 	}
-		
+
 	public void removeEvent(String title, Date d) {
-		for ( int i = 0;  i < events.size(); i++){
-			Event e = events.get(i);
-			if(e.getEventTitle().equals(Methods.getLastInput()))
-			{
+		for (int i = 0; i < getEventsOn(d).size(); i++) {
+			Event e = getEventsOn(d).get(i);
+			if (e.getEventTitle().equals(Methods.getLastInput())) {
 				events.remove(i);
 				i--;
 			}
 		}
 	}
-	
 
 	public int getEventAmount(Date d) {
-		// return getEventsOn(d).size();
-		for (int i = 0; i < events.size(); i++) {
-			Event e = events.get(i);
-			if (e.getDate().equals(Methods.getLastDateString())) {
-				counter++;
-			}
-		}
-		return counter + getEventsOn(d).size();
-
+		return getEventsOn(d).size();
 	}
 
 	public String getPriorities(Date d) {
@@ -193,8 +180,7 @@ public class EventHandler implements Serializable{
 			temp = e.getDate();
 			if (temp.compareTo(d) == 0) {
 				eventsOnDay.add(e);
-			}
-			else if (e.checkReoccursOn(d)) {
+			} else if (e.checkReoccursOn(d)) {
 				eventsOnDay.add(e);
 			}
 		}
@@ -204,9 +190,8 @@ public class EventHandler implements Serializable{
 	public ArrayList<Event> getEvents() {
 		return (ArrayList<Event>) events;
 	}
-	
+
 	public void addEvent(Event event) {
 		events.add(event);
 	}
 }
-

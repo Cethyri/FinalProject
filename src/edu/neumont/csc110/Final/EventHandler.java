@@ -9,7 +9,6 @@ public class EventHandler{
 	private Event e;
 	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	private ArrayList<Event> events = new ArrayList<Event>();
-	//private ArrayList<Event> event;
 	
 	public EventHandler(){
 		
@@ -29,11 +28,11 @@ public class EventHandler{
 	}
 
 	public void removeEvent() {
-		for ( int i = 0;  i < event.size(); i++){
-			Event e = event.get(i);
+		for ( int i = 0;  i < events.size(); i++){
+			Event e = events.get(i);
 			if(e.getEventTitle().equals(Methods.getLastInput()))
 			{
-				event.remove(i);
+				events.remove(i);
 				i--;
 			}
 		}
@@ -59,7 +58,7 @@ public class EventHandler{
 	}
 	
 	public ArrayList<Event> getEvents() {
-		return (ArrayList<Event>) event;
+		return (ArrayList<Event>) events;
 	}
 	
 }

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-@SuppressWarnings("deprecation")
 public class Calendar extends GregorianCalendar implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,8 +44,9 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		EH = new EventHandler();
 	}
 
-	public boolean view() {
+	public boolean view(boolean saved) {
 		back = false;
+		this.saved = saved;
 		
 		String input;
 
@@ -54,11 +54,11 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			input = Methods.getValidInput(viewMenu());
 			input = input.toLowerCase();
 
-			saved = viewAction(input);
+			viewAction(input);
 
 		} while (!back);
 
-		return saved;
+		return this.saved;
 	}
 
 	private String viewMenu() {
@@ -75,7 +75,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		return menu;
 	}
 
-	private boolean viewAction(String action) {
+	private void viewAction(String action) {
 		Date start;
 		switch (action) {
 		case BI_MONTH_S:
@@ -110,7 +110,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			break;
 		case DAY_S:
 			complete();
-			saved = EH.viewDay(getTime());
+			saved = EH.viewDay(getTime(), saved);
 			break;
 		case BACK:
 			back = true;
@@ -118,8 +118,6 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		default:
 			Methods.pauseOn("Please enter an input provided.", true);
 		}
-
-		return saved;
 	}
 
 	private void viewBiMonth() {
@@ -162,7 +160,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		switch (viewType) {
 		case BI_MONTH_I:
 			monthTitle = getDisplayName(MONTH, LONG_STANDALONE, Locale.US) + " " + get(YEAR);
-			for (int i = monthTitle.length(); monthTitle.length() < (WIDTH[viewType] + 1) * DAYS_IN_A_WEEK + 1; i++) {
+			for (int i = monthTitle.length(); i < (WIDTH[viewType] + 1) * DAYS_IN_A_WEEK + 1; i++) {
 				monthTitle += " ";
 			}
 			monthTitle += SPACER;
@@ -258,7 +256,7 @@ public class Calendar extends GregorianCalendar implements Serializable {
 	}
 	
 	private void setLine(int viewType, int i, String string) {
-		for (int j = string.length(); string.length() < WIDTH[viewType]; j++) {
+		for (int j = string.length(); j < WIDTH[viewType]; j++) {
 			string += " ";
 		}
 		display.set(i, display.get(i) + "|" + string);
@@ -328,15 +326,6 @@ public class Calendar extends GregorianCalendar implements Serializable {
 			line += " ";
 		}
 		return line;
-	}
-
-	private void addEvent(Event e) {
-		unimplemented();
-
-	}
-
-	private void unimplemented() {
-		Methods.pauseOn("UNINPLEMENTED", true);
 	}
 
 	public void Combine(Calendar C) {

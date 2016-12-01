@@ -3,12 +3,10 @@ package edu.neumont.csc110.Final;
 import java.io.Serializable;
 import java.util.*;
 
-@SuppressWarnings("deprecation")
 public class EventHandler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
-	private int counter;
 	private Event e;
 	private ArrayList<Event> events = new ArrayList<Event>();
 	// private ArrayList<Event> event;
@@ -19,8 +17,9 @@ public class EventHandler implements Serializable {
 
 	}
 
-	public boolean viewDay(Date d) {
+	public boolean viewDay(Date d, boolean saved) {
 		back = false;
+		this.saved = saved;
 
 		String input, action, title;
 
@@ -46,7 +45,7 @@ public class EventHandler implements Serializable {
 			}
 		} while (!back);
 
-		return saved;
+		return this.saved;
 	}
 
 	private String interactMenu(Date d) {
@@ -80,7 +79,6 @@ public class EventHandler implements Serializable {
 			break;
 		case EDIT:
 			editEvent(title, d);
-			System.out.println("hiiii");
 			saved = false;
 			break;
 		default:
@@ -118,7 +116,7 @@ public class EventHandler implements Serializable {
 	public void editEvent(String title, Date d) {
 		for (Event e : getEventsOn(d)) {
 			if (e.getEventTitle().equals(Methods.getLastInput())) {
-				e.editAll();
+				e.setAll();
 				e.displayAll();
 			}
 		}

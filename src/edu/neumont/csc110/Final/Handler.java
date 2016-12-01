@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 public class Handler {
 
@@ -107,7 +106,7 @@ public class Handler {
 			break;
 		case VIEW:
 			if (currentName != null) {
-				saved = C.view();				
+				saved = C.view(saved);				
 			}
 			else {
 				Methods.pauseOn("No calendar selected, make a new calendar or load one before viewing", true);
@@ -205,6 +204,8 @@ public class Handler {
 
 					ObjectOutputStream save = new ObjectOutputStream(saveFile);
 
+					saveBefore("creating a new calendar");
+					
 					C = new Calendar(name);
 					save.writeObject(C);
 					currentName = name;
@@ -239,7 +240,8 @@ public class Handler {
 						Calendar tC = (Calendar) save.readObject();
 
 						save.close();
-
+						
+						saved = false;
 						if (tC != null) {
 							C.Combine(tC);
 							Methods.pauseOn("Calendar " + name + " added to " + currentName + ".", true);

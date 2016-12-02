@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-//CS110 Requirement 7: Encapsulation Demonstration (Getters and Setters)
+// CS110 Requirement 7: Encapsulation Demonstration (Getters and Setters)
 
 public class Event implements Serializable {
 

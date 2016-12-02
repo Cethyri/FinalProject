@@ -44,7 +44,7 @@ public class Methods {
 	public static int getValidInteger(String question, int min, int max) {
 		System.out.println(question);
 
-		// CS110 Reuirement 2: Primitive Types (ex. int & boolean)
+		// CS110 Requirement 2: Primitive Types (ex. int & boolean)
 
 		boolean valid = false;
 		int num = 0;

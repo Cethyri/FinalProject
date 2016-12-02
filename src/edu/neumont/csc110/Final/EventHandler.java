@@ -6,10 +6,10 @@ import java.util.*;
 public class EventHandler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private Event e;
 	private ArrayList<Event> events = new ArrayList<Event>();
-	// private ArrayList<Event> event;
 
 	private boolean back, saved;
 

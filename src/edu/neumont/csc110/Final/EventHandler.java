@@ -9,9 +9,9 @@ public class EventHandler implements Serializable {
 
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private Event e;
-	
-	//CS110 Requirement 5: Array or Collection
-	
+
+	// CS110 Requirement 5: Array or Collection
+
 	private ArrayList<Event> events = new ArrayList<Event>();
 
 	private boolean back, saved;
@@ -50,7 +50,7 @@ public class EventHandler implements Serializable {
 
 		return this.saved;
 	}
-		
+
 	private String interactMenu(Date d) {
 		String menu = "";
 

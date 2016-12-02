@@ -29,6 +29,9 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * user file interaction
+	 */
 	public void interact() {
 		String input, action, name;
 		String[] parts;
@@ -330,7 +333,7 @@ public class Handler {
 	}
 
 	private void error(Exception exc) {
-		exc.printStackTrace();
-		// Methods.pauseOn("An error occured", true);
+		//exc.printStackTrace();
+		Methods.pauseOn("An error occured", true);
 	}
 }

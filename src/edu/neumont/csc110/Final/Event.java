@@ -8,18 +8,16 @@ import java.util.GregorianCalendar;
 
 //CS110 Requirement 7: Encapsulation Demonstration (Getters and Setters)
 
+public class Event implements Serializable {
 
-
-public class Event implements Serializable{
-	
 	private static final long serialVersionUID = 1L;
-	
-	//CS110 Requirement 8: Constants
-	
-	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0,
-			MAX_FREQUENCY = 5, MIN_FREQUENCY = 1, MAX_SIGNIFICANCE = 3, MIN_SIGNIFICANCE = 1;
+
+	// CS110 Requirement 8: Constants
+
+	private static final int MAX_MINUTES = 59, MIN_MINUTES = 0, MAX_HOURS = 12, MIN_HOURS = 0, MAX_FREQUENCY = 5,
+			MIN_FREQUENCY = 1, MAX_SIGNIFICANCE = 3, MIN_SIGNIFICANCE = 1;
 	private int startHours, startMinutes, endHours, endMinutes;
-	//CS110 Requirement 10: Enumerated Type 
+	// CS110 Requirement 10: Enumerated Type
 	private EventType occurrence;
 	private PriorityType importance;
 	private String description, startAMPM, endAMPM, eventTitle, dateString;
@@ -126,13 +124,13 @@ public class Event implements Serializable{
 			yesNo = Methods.getConfirmation("\nYou entered : \n" + description + "\n\nIs this correct?");
 		} while (!yesNo);
 	}
-	
+
 	private void setEventOccurence() {
 		valid = false;
 		int frequency = 0;
-		
-		//CS110 Requirement 9: Switch Statement
-		
+
+		// CS110 Requirement 9: Switch Statement
+
 		frequency = Methods.getValidInteger(
 				"\nHow often will this event happen? Enter the number corrosponding to "
 						+ "how often the event occurs.\n[1 - Once] [2 - Daily] [3 - Weekly] [4 - Monthly] [5 - Yearly]",
@@ -306,9 +304,9 @@ public class Event implements Serializable{
 
 		gcLocal.setTime(eventDate);
 		gcCheck.setTime(recursiveDate);
-		
-		//CS110 Requirement 3: Branching
-		
+
+		// CS110 Requirement 3: Branching
+
 		if (occurrence.equals(EventType.DAILY)) {
 
 			checkDate = true;

@@ -6,6 +6,4 @@ public class Driver {
 		Handler H = new Handler();
 		H.interact();
 	}
-
-	//CS110 Requirement 11: Javadoc Comment Syntax
 }

@@ -19,7 +19,14 @@ public class EventHandler implements Serializable {
 	public EventHandler() {
 
 	}
-
+	
+	/**
+	 * Views any given date 
+	 * 
+	 * @param d - The date to be viewed
+	 * @param saved - Checks whether or not their will be a save
+	 * @return returns this.saved
+	 */
 	public boolean viewDay(Date d, boolean saved) {
 		back = false;
 		this.saved = saved;
@@ -50,7 +57,12 @@ public class EventHandler implements Serializable {
 
 		return this.saved;
 	}
-		
+	/**
+	 * 	Interaction with user to either add, remove or edit events
+	 * 	or return to menu.
+	 * @param d - Viewed date
+	 * @return returns menu
+	 */
 	private String interactMenu(Date d) {
 		String menu = "";
 
@@ -70,7 +82,15 @@ public class EventHandler implements Serializable {
 		menu += "\t" + BACK + " - return to the file menu\n";
 		return menu;
 	}
-
+	
+	/**
+	 * Takes action according to input. With event
+	 * title input.
+	 * @param action - Add, Remove or Edit event
+	 * @param title - Event Title
+	 * @param d - Date
+	 * @return returns boolean saved
+	 */
 	private boolean interactWith(String action, String title, Date d) {
 
 		Methods.clearScreen();
@@ -91,6 +111,12 @@ public class EventHandler implements Serializable {
 		return saved;
 	}
 
+	/**
+	 * Takes action according to input.
+	 * @param action
+	 * @param d
+	 * @return returns boolean saved
+	 */
 	private boolean interactWith(String action, Date d) {
 
 		Methods.clearScreen();
@@ -109,13 +135,22 @@ public class EventHandler implements Serializable {
 
 		return saved;
 	}
-
+	
+	/**
+	 * Adds new event to ArrayList<Event> events.
+	 * @param d - Date
+	 */
 	public void addEvent(Date d) {
 		e = new Event(d);
 		e.displayAll();
 		events.add(e);
 	}
 
+	/**
+	 * Edits any given event with entered title.
+	 * @param title - event title
+	 * @param d - date
+	 */
 	public void editEvent(String title, Date d) {
 		for (Event e : getEventsOn(d)) {
 			if (e.getEventTitle().equals(Methods.getLastInput())) {
@@ -125,6 +160,11 @@ public class EventHandler implements Serializable {
 		}
 	}
 
+	/**
+	 * Removes any given event with entered tile.
+	 * @param title - event title
+	 * @param d - date
+	 */
 	public void removeEvent(String title, Date d) {
 		for (int i = 0; i < getEventsOn(d).size(); i++) {
 			Event e = getEventsOn(d).get(i);
@@ -135,10 +175,20 @@ public class EventHandler implements Serializable {
 		}
 	}
 
+	/**
+	 * Gets the total amount of events on any given date.
+	 * @param d - date
+	 * @return returns getEventsOn(d).size();
+	 */
 	public int getEventAmount(Date d) {
 		return getEventsOn(d).size();
 	}
 
+	/**
+	 * Retrieves priority level.
+	 * @param d - date
+	 * @return returns priorities
+	 */
 	public String getPriorities(Date d) {
 		String priorities = "";
 		boolean low = false, med = false, hi = false;
@@ -172,6 +222,11 @@ public class EventHandler implements Serializable {
 		return priorities;
 	}
 
+	/**
+	 * Gets Events on a any given date.
+	 * @param d - date
+	 * @return returns eventsOnDay
+	 */
 	public ArrayList<Event> getEventsOn(Date d) {
 		Date temp;
 		ArrayList<Event> eventsOnDay = new ArrayList<Event>();
@@ -191,6 +246,10 @@ public class EventHandler implements Serializable {
 		return (ArrayList<Event>) events;
 	}
 
+	/**
+	 * Adds Event for combine method in Calendar.
+	 * @param event
+	 */
 	public void addEvent(Event event) {
 		events.add(event);
 	}

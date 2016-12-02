@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +38,7 @@ public class Methods {
 			}
 		} while (!valid);
 
-		return input;
+		return input.trim();
 	}
 
 	public static int getValidInteger(String question, int min, int max) {

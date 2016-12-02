@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -30,23 +30,25 @@ public class Event implements Serializable {
 		setAll(d);
 	}
 
-	public Event(int startHours, int startMinutes, int endHours, int endMinutes, int frequency, int significance,
-			EventType occurrence, PriorityType importance, String description, String startAMPM, String endAMPM,
-			String eventTitle, Date eventDate, String dateString) {
-
-		this.occurrence = occurrence;
-		this.importance = importance;
-		this.startAMPM = startAMPM;
-		this.endAMPM = endAMPM;
-		this.startHours = startHours;
-		this.startMinutes = startMinutes;
-		this.endHours = endHours;
-		this.endMinutes = endMinutes;
-		this.description = description;
-		this.eventTitle = eventTitle;
-		this.eventDate = eventDate;
-		this.dateString = dateString;
-	}
+	// public Event(int startHours, int startMinutes, int endHours, int
+	// endMinutes, int frequency, int significance,
+	// EventType occurrence, PriorityType importance, String description, String
+	// startAMPM, String endAMPM,
+	// String eventTitle, Date eventDate, String dateString) {
+	//
+	// this.occurrence = occurrence;
+	// this.importance = importance;
+	// this.startAMPM = startAMPM;
+	// this.endAMPM = endAMPM;
+	// this.startHours = startHours;
+	// this.startMinutes = startMinutes;
+	// this.endHours = endHours;
+	// this.endMinutes = endMinutes;
+	// this.description = description;
+	// this.eventTitle = eventTitle;
+	// this.eventDate = eventDate;
+	// this.dateString = dateString;
+	// }
 
 	public void setTitle() {
 		eventTitle = Methods.getValidInput("What is the title for this event?");
@@ -54,6 +56,11 @@ public class Event implements Serializable {
 
 	public void setEventDate() {
 		eventDate = (Methods.getValidDateInput("What date does this event occur on?"));
+		dateString = formatter.format(eventDate);
+	}
+
+	public void setEventDate(Date date) {
+		eventDate = date;
 		dateString = formatter.format(eventDate);
 	}
 
@@ -72,7 +79,7 @@ public class Event implements Serializable {
 			endMinutes = setMinutes();
 			if ((startAMPM == endAMPM && startHours > endHours)
 					|| (startAMPM == endAMPM && (startHours == endHours && startMinutes > endMinutes))
-					|| (startAMPM.equals("pm") && endAMPM.equals("am"))) {
+					|| (startAMPM.equalsIgnoreCase("pm") && endAMPM.equalsIgnoreCase("am"))) {
 				valid = false;
 				System.out.println(
 						"You entered a time that would make the event end before it starts. Please try again.");
@@ -184,7 +191,7 @@ public class Event implements Serializable {
 	}
 
 	public void setAll(Date leDate) {
-		eventDate = leDate;
+		setEventDate(leDate);
 		setTitle();
 		setStartTime();
 		setEndTime();
@@ -305,47 +312,50 @@ public class Event implements Serializable {
 		gcLocal.setTime(eventDate);
 		gcCheck.setTime(recursiveDate);
 
+		checkDate = false;
+
 		// CS110 Requirement 3: Branching
 
-		if (occurrence.equals(EventType.DAILY)) {
+		if (gcLocal.before(gcCheck)) {
 
-			checkDate = true;
+			if (occurrence.equals(EventType.DAILY)) {
 
-		} else if (occurrence.equals(EventType.WEEKLY)
-				&& (gcLocal.get(GregorianCalendar.DAY_OF_WEEK) == gcCheck.get(GregorianCalendar.DAY_OF_WEEK))) {
-
-			checkDate = true;
-
-		} else if (occurrence.equals(EventType.MONTHLY)) {
-
-			if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)) {
 				checkDate = true;
-			} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
-					&& gcCheck.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck
-							.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
-				checkDate = true;
-			} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) < gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
-					&& gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcLocal
-							.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
-				checkDate = true;
-			}
 
-		} else if (occurrence.equals(EventType.YEARLY)) {
+			} else if (occurrence.equals(EventType.WEEKLY)
+					&& (gcLocal.get(GregorianCalendar.DAY_OF_WEEK) == gcCheck.get(GregorianCalendar.DAY_OF_WEEK))) {
 
-			if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
-					&& gcLocal.get(GregorianCalendar.MONTH) == gcCheck.get(GregorianCalendar.MONTH)) {
 				checkDate = true;
-			} else if (gcLocal.isLeapYear(gcLocal.get(GregorianCalendar.YEAR))
-					&& gcLocal.get(GregorianCalendar.MONTH) == GregorianCalendar.FEBRUARY) {
-				if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+
+			} else if (occurrence.equals(EventType.MONTHLY)) {
+
+				if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)) {
+					checkDate = true;
+				} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
 						&& gcCheck.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck
 								.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
 					checkDate = true;
+				} else if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) < gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+						&& gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcLocal
+								.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
+					checkDate = true;
 				}
-			}
 
-		} else {
-			checkDate = false;
+			} else if (occurrence.equals(EventType.YEARLY)) {
+
+				if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+						&& gcLocal.get(GregorianCalendar.MONTH) == gcCheck.get(GregorianCalendar.MONTH)) {
+					checkDate = true;
+				} else if (gcLocal.isLeapYear(gcLocal.get(GregorianCalendar.YEAR))
+						&& gcLocal.get(GregorianCalendar.MONTH) == GregorianCalendar.FEBRUARY) {
+					if (gcLocal.get(GregorianCalendar.DAY_OF_MONTH) > gcCheck.get(GregorianCalendar.DAY_OF_MONTH)
+							&& gcCheck.get(GregorianCalendar.DAY_OF_MONTH) == gcCheck
+									.getActualMaximum(GregorianCalendar.DAY_OF_MONTH)) {
+						checkDate = true;
+					}
+				}
+
+			}
 		}
 
 		return checkDate;

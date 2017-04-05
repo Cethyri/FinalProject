@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -216,7 +216,17 @@ public class Calendar extends GregorianCalendar implements Serializable {
 		}
 
 	}
-
+	
+	// CS110 Requirement 11: Javadoc Comment Syntax
+	/**
+	 * creates a single row (one week) of the display
+	 * 
+	 * @param viewType determines how to format the row, is one of BI_MONTH_I, MONTH_I, WEEK_I
+	 * @param startRow what row of the display this started on
+	 * @param startDay first day that should display
+	 * @param startMonth what month the display starts on (for week or bi-month)
+	 * @param i the current row
+	 */
 	private void singleRow(int viewType, int startRow, int startDay, int startMonth, int i) {
 		for (int j = 0; j < DAYS_IN_A_WEEK; j++) {
 			if (j < startDay && i == startRow || (get(MONTH) != startMonth && viewType != WEEK_I)) {

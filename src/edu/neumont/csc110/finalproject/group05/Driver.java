@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 public class Driver {
 
@@ -6,6 +6,4 @@ public class Driver {
 		Handler H = new Handler();
 		H.interact();
 	}
-
-	//CS110 Requirement 11: Javadoc Comment Syntax
 }

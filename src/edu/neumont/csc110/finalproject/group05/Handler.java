@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +29,9 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * user file interaction
+	 */
 	public void interact() {
 		String input, action, name;
 		String[] parts;
@@ -209,7 +212,7 @@ public class Handler {
 					save.writeObject(C);
 					currentName = name;
 
-					Methods.pauseOn("New Calendar \"" + name + "\" created", false);
+					Methods.pauseOn("New Calendar \"" + name + "\" created", true);
 
 					save.close();
 
@@ -225,7 +228,7 @@ public class Handler {
 
 	private void add(String name) {
 		if (currentName != null) {
-			if (!currentName.equals(name)) {
+			if (!currentName.equalsIgnoreCase(name)) {
 
 				File f = new File(FILE_PATH + name + ".sav");
 
@@ -330,7 +333,7 @@ public class Handler {
 	}
 
 	private void error(Exception exc) {
-		exc.printStackTrace();
-		// Methods.pauseOn("An error occured", true);
+		//exc.printStackTrace();
+		Methods.pauseOn("An error occured", true);
 	}
 }

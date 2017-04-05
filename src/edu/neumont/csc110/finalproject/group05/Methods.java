@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,14 +20,15 @@ public class Methods {
 	public Methods() {
 
 	}
+
 	public static String getValidInput(String question) {
 		System.out.println(question);
 		boolean valid = false;
 
 		do {
-			
-			//CS110 Requirement 1: Console I/O
-			
+
+			// CS110 Requirement 1: Console I/O
+
 			input = in.nextLine();
 
 			if (!input.isEmpty()) {
@@ -37,21 +38,21 @@ public class Methods {
 			}
 		} while (!valid);
 
-		return input;
+		return input.trim();
 	}
 
 	public static int getValidInteger(String question, int min, int max) {
 		System.out.println(question);
-		
-		//CS110 Reuirement 2: Primitive Types (ex. int & boolean)
-		
+
+		// CS110 Requirement 2: Primitive Types (ex. int & boolean)
+
 		boolean valid = false;
 		int num = 0;
 		do {
 			input = in.nextLine();
 
 			input = onlyNum(input);
-			
+
 			if (!input.isEmpty()) {
 				num = Integer.parseInt(input);
 
@@ -70,9 +71,9 @@ public class Methods {
 
 	private static String onlyNum(String input) {
 		String temp = "";
-		
-		//CS110 Requirement 4: Iteration - for loop
-		
+
+		// CS110 Requirement 4: Iteration - for loop
+
 		for (int x = 0; x < input.length(); x++) {
 			if (input.charAt(x) >= CHAR_VAL_NUM_MIN && input.charAt(x) <= CHAR_VAL_NUM_MAX) {
 				temp += input.charAt(x);
@@ -82,8 +83,8 @@ public class Methods {
 		return temp;
 	}
 
-	//CS110 Requirement 12: Error (User Input Validation)
-	
+	// CS110 Requirement 12: Error (User Input Validation)
+
 	public static Date getValidDateInput(String question) {
 		System.out.println(question);
 		System.out.println("Ex. MM/DD/YYYY, 1/1/1111, 01/01/1111");
@@ -109,17 +110,17 @@ public class Methods {
 
 		return dateFormat;
 	}
-	
-	//CS110 Requirement 6: Methods / Fuctions
-	
+
+	// CS110 Requirement 6: Methods / Fuctions
+
 	public static boolean getConfirmation(String question) {
 		question += " (yes or no)";
 		System.out.println(question);
 		boolean valid = false;
 		answer = false;
 
-		//CS110 Requirement 4: Iteration - do while loop
-		
+		// CS110 Requirement 4: Iteration - do while loop
+
 		do {
 			String confirmation = in.nextLine();
 

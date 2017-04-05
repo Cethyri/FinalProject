@@ -1,4 +1,4 @@
-package edu.neumont.csc110.Final;
+package edu.neumont.csc110.finalproject.group05;
 
 import java.io.Serializable;
 import java.util.*;
@@ -6,13 +6,13 @@ import java.util.*;
 public class EventHandler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	private static final String ADD = "add", REMOVE = "remove", EDIT = "edit", BACK = "back";
 	private Event e;
-	
-	//CS110 Requirement 5: Array or Collection
-	
+
+	// CS110 Requirement 5: Array or Collection
+
 	private ArrayList<Event> events = new ArrayList<Event>();
-	// private ArrayList<Event> event;
 
 	private boolean back, saved;
 
@@ -48,7 +48,7 @@ public class EventHandler implements Serializable {
 				for (int i = 1; i < parts.length; i++) {
 					title += parts[i] + " ";
 				}
-				title.trim();
+				title = title.trim();
 				interactWith(action, title, d);
 			} else {
 				interactWith(action, d);
@@ -153,7 +153,7 @@ public class EventHandler implements Serializable {
 	 */
 	public void editEvent(String title, Date d) {
 		for (Event e : getEventsOn(d)) {
-			if (e.getEventTitle().equals(Methods.getLastInput())) {
+			if (e.getEventTitle().equalsIgnoreCase(title)) {
 				e.setAll();
 				e.displayAll();
 			}
@@ -168,7 +168,7 @@ public class EventHandler implements Serializable {
 	public void removeEvent(String title, Date d) {
 		for (int i = 0; i < getEventsOn(d).size(); i++) {
 			Event e = getEventsOn(d).get(i);
-			if (e.getEventTitle().equals(Methods.getLastInput())) {
+			if (e.getEventTitle().equalsIgnoreCase(title)) {
 				events.remove(i);
 				i--;
 			}
